@@ -6,6 +6,11 @@ body{
   font-family: "Karla", sans-serif;;
 }
 
+button{
+  border: none;
+  cursor: pointer;
+}
+
 .container{
   max-width: 700px;
   margin: 0 auto;
@@ -48,8 +53,6 @@ body{
 
 .review-post-btn{
   width: 75px;
-  cursor: pointer;
-  border: none;
 }
 
 .review-post-btn:hover{

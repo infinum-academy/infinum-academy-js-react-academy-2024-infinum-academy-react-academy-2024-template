@@ -1,20 +1,5 @@
 const reviewList = document.querySelector(".review-list");
-
-const reviewArr = [
-  {
-    comment: "Good show, plots are interesting and it's very dynamic",
-    rating: 4,
-  },
-  {
-    comment:
-      "Meh, first couple seasons are watchable but the rest is not worth my time",
-    rating: 2,
-  },
-  {
-    comment: "Eric shouldn't have left the team, his departure makes no sense.",
-    rating: 3,
-  },
-];
+const reviewArr = JSON.parse(localStorage.getItem("review-array")) || [];
 
 function renderReviews(r) {
   if (!reviewList.childElementCount) {
@@ -49,6 +34,7 @@ function addNewReview() {
     rating: rating.value,
   };
   reviewArr.push(newReview);
+  localStorage.setItem("review-array", JSON.stringify(reviewArr));
   renderReviews(newReview);
   comment.value = "";
   rating.value = "";

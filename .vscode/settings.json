@@ -1,7 +1,0 @@
-{
-  "editor.defaultFoldingRangeProvider": null,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "prettier.proseWrap": "preserve",
-  "prettier.singleAttributePerLine": true
-}
