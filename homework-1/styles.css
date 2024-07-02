@@ -1,0 +1,52 @@
+body{
+  margin: 0;
+  padding: 0 20px;
+  background-color: navy;
+  color: #fff;
+}
+
+.container{
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.show-section{
+  background-color: #fff;
+  color: navy;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.show-img{
+  width: 100%;
+}
+
+.show-info{
+  padding: 30px;
+}
+
+.review-form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-form > *{
+  border-radius: 8px;
+  padding: 10px;
+  flex: 0 0 auto;
+}
+
+.review-comment{
+  width: calc(100% - 20px);
+}
+
+.review-rating{
+  width: 100px;
+}
+
+.review-post-btn{
+  width: 75px;
+  cursor: pointer;
+}
+
