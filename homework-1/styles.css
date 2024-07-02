@@ -3,6 +3,7 @@ body{
   padding: 0 20px;
   background-color: navy;
   color: #fff;
+  font-family: "Karla", sans-serif;;
 }
 
 .container{
@@ -48,5 +49,18 @@ body{
 .review-post-btn{
   width: 75px;
   cursor: pointer;
+  border: none;
+}
+
+.review-post-btn:hover{
+  background-color: lightgrey;
+}
+
+.review-element{
+  width: calc(100% - 20px);
+  background-color: rgb(85, 3, 192);
+  border-radius: 8px;
+  padding: 10px;
+  margin: 20px 0;
 }
 

@@ -1,30 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>TV shows APP</title>
-</head>
-<body>
-  <div class="container">
-    <h1>TV shows APP</h1>
-    <div class="show-section">
-      <img class="show-img" src="https://ntvb.tmsimg.com/assets/p3561420_b_h8_bn.jpg?w=960&h=540" alt="navy-cis-team-photo">
-      <div class="show-info">
-        <h2>Navy Cis Los Angeles</h2>
-        <p>Follows undercover agents assigned to the Office of Special Projects, a special branch of the Naval Criminal Investigative Service (NCIS) that investigate terrorism and National Security threats.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <title>TV shows APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container">
+      <h1>TV shows APP</h1>
+      <div class="show-section">
+        <img
+          class="show-img"
+          src="https://ntvb.tmsimg.com/assets/p3561420_b_h8_bn.jpg?w=960&h=540"
+          alt="navy-cis-team-photo"
+        />
+        <div class="show-info">
+          <h2>Navy Cis Los Angeles</h2>
+          <p>
+            Follows undercover agents assigned to the Office of Special
+            Projects, a special branch of the Naval Criminal Investigative
+            Service (NCIS) that investigate terrorism and National Security
+            threats.
+          </p>
+        </div>
+      </div>
+      <h2>Reviews</h2>
+      <div class="review-section">
+        <div class="review-form">
+          <textarea
+            class="review-comment"
+            name="review-comment"
+            id="review-comment"
+            placeholder="Add review"
+            rows="3"
+          ></textarea>
+          <input
+            class="review-rating"
+            type="number"
+            name="review-rating"
+            id="review-rating"
+            placeholder="Add rating"
+          />
+          <button
+            class="review-post-btn"
+            type="submit"
+            onclick="addNewReview()"
+          >
+            Post
+          </button>
+        </div>
+        <div class="review-list"></div>
       </div>
     </div>
-    <h2>Reviews</h2>
-    <div class="review-section">
-      <div class="review-form">
-        <textarea class="review-comment" name="review-comment" id="review-comment" placeholder="Add review" rows="3"></textarea>
-        <input class="review-rating" type="number" name="review-rating" id="review-rating" placeholder="Add rating">
-        <button class="review-post-btn" type="submit">Post</button>
-      </div>
-    </div>
-  </div>
-</body>
+    <script src="index.js"></script>
+  </body>
 </html>
