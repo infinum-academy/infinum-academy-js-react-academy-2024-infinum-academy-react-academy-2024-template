@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
   </head>
   <body>
     <div class="container">
@@ -40,19 +43,32 @@
             id="review-comment"
             placeholder="Add review"
             rows="3"
+            tabindex="1"
           ></textarea>
-          <input
-            class="review-rating"
-            type="number"
-            name="review-rating"
-            id="review-rating"
-            placeholder="Add rating"
-          />
-          <button
-            class="review-post-btn"
-            type="submit"
-            onclick="addNewReview()"
-          >
+
+          <div class="review-rating">
+            <label>
+              <input type="radio" name="rating" value="5" onchange="onRatingChange(event)" tabindex="2">
+              <i class="fa-regular fa-star star"></i>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="4" onchange="onRatingChange(event)" tabindex="2">
+              <i class="fa-regular fa-star star"></i>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="3" onchange="onRatingChange(event)" tabindex="2">
+              <i class="fa-regular fa-star star"></i>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="2" onchange="onRatingChange(event)" tabindex="2">
+              <i class="fa-regular fa-star star"></i>
+            </label>
+            <label>
+              <input type="radio" name="rating" value="1" onchange="onRatingChange(event)" tabindex="2">
+              <i class="fa-regular fa-star star"></i>
+            </label>
+          </div>
+          <button class="review-post-btn" type="submit" onclick="addNewReview()" tabindex="3">
             Post
           </button>
         </div>

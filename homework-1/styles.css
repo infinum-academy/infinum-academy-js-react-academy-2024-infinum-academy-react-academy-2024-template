@@ -48,8 +48,12 @@ button{
   width: calc(100% - 20px);
 }
 
-.review-rating{
-  width: 100px;
+.review-rating, .review-rated{
+  display: flex;
+  justify-content: flex-end;
+  direction: rtl;
+  padding: 0;
+  user-select: none;
 }
 
 .review-post-btn{
@@ -75,4 +79,18 @@ button{
   padding: 10px 20px;
   background-color: red;
   color: #fff;
+}
+
+.review-rating > label:hover{
+  cursor: pointer;
+}
+
+.review-rating input{
+  opacity: 0;
+  width: 1px;
+}
+
+.review-rating > label:hover > i,
+.review-rating > label:hover ~ label > i {
+  color: gold;
 }
