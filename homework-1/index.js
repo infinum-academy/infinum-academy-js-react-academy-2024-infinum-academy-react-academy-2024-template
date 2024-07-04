@@ -47,7 +47,10 @@ function addNewReview() {
   const comment = document.getElementById("review-comment");
   let id;
 
-  if (!comment.value || !rating || rating < 1 || rating > 5) return;
+  if (!comment.value || !rating || rating < 1 || rating > 5) {
+    alert("Please fill in the comment and select a rating between 1 and 5");
+    return;
+  }
 
   if (reviewArr.length) {
     id = reviewArr[0].id + 1;
