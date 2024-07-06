@@ -1,0 +1,15 @@
+body{
+  margin: 0;
+  padding: 0 20px 20px 20px;
+  background-color: navy !important;
+  color: #fff;
+}
+
+input{
+  color: #000 !important;
+}
+
+button{
+  border: none;
+  cursor: pointer;
+}

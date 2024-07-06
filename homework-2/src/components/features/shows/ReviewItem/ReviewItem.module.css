@@ -1,0 +1,10 @@
+.reviewElement{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  width: calc(100% - 20px);
+  background-color: rgb(85, 3, 192) !important;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 20px 0;
+}
