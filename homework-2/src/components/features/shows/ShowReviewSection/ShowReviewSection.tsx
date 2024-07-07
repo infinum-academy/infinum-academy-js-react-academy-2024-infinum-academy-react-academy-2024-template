@@ -1,6 +1,6 @@
 'use client'
-import ReviewForm from "@/components/shared/ReviewForm/ReviewForm";
-import ReviewList from "../ReviewList/ReviewList";
+import ReviewForm from "@/components/features/shows/ReviewForm/ReviewForm";
+import ReviewList from "@/components/features/reviews/ReviewList/ReviewList";
 import { IReviewProps } from "@/typings/review";
 
 export default function ReviewContainer({reviews, onAddReview, onDeleteReview} : IReviewProps){

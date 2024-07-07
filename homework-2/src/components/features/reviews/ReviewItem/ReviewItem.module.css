@@ -1,7 +1,6 @@
 .reviewElement{
-  display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   width: 100%;
   background-color: rgb(85, 3, 192) !important;
   border-radius: 8px;

@@ -1,21 +1,25 @@
 import { IReviewItemProps } from "@/typings/review"
-import { Button, Flex } from "@chakra-ui/react"
+import { Button, Flex, Avatar, Text } from "@chakra-ui/react"
 import styles from './ReviewItem.module.css'
 
 export default function ReviewItem({review, onDeleteReview}: IReviewItemProps) {
   return (
-    <div className={styles.reviewElement}>
-      <Flex flexDirection="column" flexWrap="wrap">
+    <Flex className={styles.reviewElement} flexWrap="wrap" gap={2} p={5}>
+      <Flex flexDirection="column" flexWrap="wrap" gap={2}>
+        <Flex alignItems="center" flexWrap="wrap">
+          <Avatar mr={2}/>
+          <Text>email@example.com</Text>
+        </Flex>
         <div>
           {review.comment}
         </div>
         <div>
           {review.rating}/5
         </div>
+        <div>
+          <Button display={"inline-block"} colorScheme="red" onClick={() => onDeleteReview(review.id)}>Delete</Button>
+        </div>
       </Flex>
-      <div>
-        <Button colorScheme="red" onClick={() => onDeleteReview(review.id)}>Delete</Button>
-      </div>
-    </div>
+    </Flex>
   )
 }

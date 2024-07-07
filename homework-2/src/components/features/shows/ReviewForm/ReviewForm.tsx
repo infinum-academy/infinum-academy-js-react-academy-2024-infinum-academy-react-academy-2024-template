@@ -18,7 +18,7 @@ import { nanoid } from "nanoid";
 export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   const [rating, setRating] = useState("");
 
-  function addNewReview() {
+  function addShowReview() {
     const comment = document.getElementById(
       "reviewComment"
     ) as HTMLInputElement;
@@ -81,12 +81,12 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
           <NumberDecrementStepper />
         </NumberInputStepper>
       </NumberInput>
-
+      
       <div>
         <Button
           className="reviewPostBtn"
           type="submit"
-          onClick={addNewReview}
+          onClick={addShowReview}
           tabIndex={3}
         >
           Post

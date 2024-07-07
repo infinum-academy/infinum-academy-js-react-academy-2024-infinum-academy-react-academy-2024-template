@@ -1,6 +1,6 @@
 "use client";
 import styles from "./MainLayout.module.css";
-import ReviewContainer from "@/components/features/reviews/ReviewContainer/ReviewContainer";
+import ShowReviewSection from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
 import ShowDetails from "@/components/features/shows/ShowDetails/ShowDetails";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -56,7 +56,7 @@ export default function MainLayout() {
       saveToLocalStorage("reviewarray", filteredArray);
     }
   }
-
+  
   return (
     <main className={styles.main}>
       <Heading
@@ -74,7 +74,7 @@ export default function MainLayout() {
       >
         Reviews
       </Heading>
-      <ReviewContainer
+      <ShowReviewSection
         reviews={reviewArr}
         onAddReview={onAddReview}
         onDeleteReview={onDeleteReview}
