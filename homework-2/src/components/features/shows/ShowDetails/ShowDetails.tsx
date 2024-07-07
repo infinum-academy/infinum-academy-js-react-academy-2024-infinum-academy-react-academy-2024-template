@@ -3,15 +3,14 @@ import Image from "next/image";
 import styles from "./ShowDetails.module.css";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { IShowProps } from "@/typings/show";
+import { IShow } from "@/typings/show";
 
 const defaultImageSrc = "https://fakeimg.pl/960x540?text=No+image+found";
 
-
-export default function ShowDetails({show}: IShowProps) {
-  const { title, description, averageRating, imageUrl } = show;
+export default function ShowDetails({show}: {show: IShow}) {
+  const { title, description, averageRating, imageUrl } = show || {};
   const [isFound, setIsFound] = useState(false);
-  const [avgRating , setAverageRating] = useState<number | null>(0);
+  
   useEffect(() => {
     const isImageFound = async (imageSrc: string) => {
       const response = await fetch("http://localhost:3000" + imageSrc, {
@@ -21,8 +20,7 @@ export default function ShowDetails({show}: IShowProps) {
       setIsFound(result);
     };
     isImageFound(String(imageUrl));
-
-  }, []);
+  }, [imageUrl]);
 
   return (
     <div className={styles.showSection}>
@@ -40,7 +38,7 @@ export default function ShowDetails({show}: IShowProps) {
           className="fa-regular fa-star fa-lg"
           style={{ color: "#FFD43B" }}
         ></i>
-        {" "}{averageRating ? <span className="averageRating">{averageRating}</span> : <span>Not rated yet</span>}
+        {averageRating ? <span className="averageRating"> {averageRating}</span> : <span> No ratings</span>}
         <p>
           {description}
         </p>
