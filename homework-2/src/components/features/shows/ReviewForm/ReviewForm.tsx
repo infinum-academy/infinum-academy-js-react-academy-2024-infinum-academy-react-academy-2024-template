@@ -2,11 +2,6 @@
 import {
   Button,
   Flex,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   Textarea,
 } from "@chakra-ui/react";
 import React from "react";
@@ -14,18 +9,35 @@ import { useState } from "react";
 import styles from "./ReviewForm.module.css";
 import { IReviewFormProps } from "@/typings/review";
 import { nanoid } from "nanoid";
+import StarIcon from "../StarIcon/StarIcon";
 
 export default function ReviewForm({ onAddReview }: IReviewFormProps) {
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
+
+  function onRatingInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const rating = Number(event.target.value);
+    setRating(rating);
+    styleRatingStars(rating);
+  }
+
+   function styleRatingStars(rating: number) {
+    const stars: NodeListOf<HTMLElement>  = document.querySelectorAll(
+      "#reviewRating i"
+    );
+  
+    const selectedIndex = 5 - rating;
+
+    stars.forEach((star) => (star.style.color = "#fff"));
+
+    for (let i = 4; i >= selectedIndex; i--) {
+      stars[i].style.color = "gold";
+    }
+  }
 
   function addShowReview() {
     const comment = document.getElementById(
       "reviewComment"
     ) as HTMLInputElement;
-    const ratingEl = document.getElementById(
-      "reviewRating"
-    ) as HTMLInputElement;
-    const rating = Number(ratingEl.value);
 
     if (!comment.value || !rating || rating < 1 || rating > 5) {
       alert("Please fill in the comment and select a rating between 1 and 5");
@@ -42,11 +54,17 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   }
 
   function resetFormInputs() {
+    const stars = document.querySelectorAll(
+      ".star"
+    ) as NodeListOf<HTMLElement>;
+
+    stars.forEach((star) => (star.style.color = "#fff"));
+
     const comment = document.getElementById(
       "reviewComment"
     ) as HTMLInputElement;
     comment.value = "";
-    setRating("");
+    setRating(0);
   }
   return (
     <Flex className={styles.reviewForm}>
@@ -61,27 +79,14 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
         tabIndex={1}
       ></Textarea>
 
-      <NumberInput
-        min={1}
-        max={5}
-        value={rating}
-        onChange={(valueString) => setRating(valueString)}
-        bg="white"
-        style={{ alignSelf: "flex-start" }}
-        className="reviewRating"
-        name="review-rating"
-        id="reviewRating"
-      >
-        <NumberInputField
-          tabIndex={2}
-          placeholder="Add rating"
-        />
-        <NumberInputStepper>
-          <NumberIncrementStepper />
-          <NumberDecrementStepper />
-        </NumberInputStepper>
-      </NumberInput>
-      
+
+      <Flex className={styles.reviewRating} id="reviewRating">
+        {
+          Array.from({ length: 5 }).map((_, index) => (
+            <StarIcon key={index} label="rating" value={5 - index} onChange={onRatingInputChange}/>
+          ))
+      }
+      </Flex>
       <div>
         <Button
           className="reviewPostBtn"
