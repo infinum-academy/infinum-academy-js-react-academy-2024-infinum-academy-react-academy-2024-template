@@ -1,6 +1,6 @@
 import { IReviewListProps } from "@/typings/review";
-import { Flex } from "@chakra-ui/react";
 import ReviewItem from "../ReviewItem/ReviewItem";
+import { Flex } from "@chakra-ui/react";
 
 export default function ReviewList({reviews, onDeleteReview}: IReviewListProps ) {
   return (

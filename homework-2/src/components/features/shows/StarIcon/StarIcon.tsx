@@ -1,10 +1,10 @@
 interface StarIconProps {
   label: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: number;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function StarIcon(props : StarIconProps){
+export default function StarIcon(props: StarIconProps){
   return (
     <label>
       <input

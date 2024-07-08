@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-.reviewRating, .reviewRated{
+.reviewRating{
   display: flex;
   justify-content: flex-end;
   direction: rtl;
@@ -37,5 +37,5 @@
 
 .reviewRating > label:hover > i,
 .reviewRating > label:hover ~ label > i {
-  color: gold;
+  color: gold !important;
 }

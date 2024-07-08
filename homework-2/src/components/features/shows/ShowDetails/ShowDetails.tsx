@@ -1,9 +1,9 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./ShowDetails.module.css";
-import React, { useEffect } from "react";
-import { useState } from "react";
 import { IShow } from "@/typings/show";
+import { Box, Card, Heading, Text } from "@chakra-ui/react";
 
 const defaultImageSrc = "https://fakeimg.pl/960x540?text=No+image+found";
 
@@ -23,7 +23,7 @@ export default function ShowDetails({show}: {show: IShow}) {
   }, [imageUrl]);
 
   return (
-    <div className={styles.showSection}>
+    <Card bg="white" color="navy" className={styles.showSection}>
       <Image
         className={styles.showImage}
         src={isFound ? String(imageUrl) : defaultImageSrc}
@@ -32,17 +32,17 @@ export default function ShowDetails({show}: {show: IShow}) {
         width={960}
         height={540}
       />
-      <div className={styles.showInfo}>
-        <h2>{title}</h2>
+      <Box className={styles.showInfo}>
+        <Heading size="lg">{title}</Heading>
         <i
           className="fa-regular fa-star fa-lg"
           style={{ color: "#FFD43B" }}
         ></i>
         {averageRating ? <span className="averageRating"> {averageRating}</span> : <span> No ratings</span>}
-        <p>
+        <Text>
           {description}
-        </p>
-      </div>
-    </div>
+        </Text>
+      </Box>
+    </Card>
   );
 }

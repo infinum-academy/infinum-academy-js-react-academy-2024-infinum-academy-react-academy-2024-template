@@ -1,18 +1,22 @@
 "use client";
-import styles from "./MainLayout.module.css";
-import ShowReviewSection from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
-import ShowDetails from "@/components/features/shows/ShowDetails/ShowDetails";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import ShowReviewSection from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
+import ShowDetails from "@/components/features/shows/ShowDetails/ShowDetails";
 import { IReview } from "@/typings/review";
 import { IShow } from "@/typings/show";
+import {
+  getItemFromLocalStorage,
+  removeLocalStorageItem,
+  saveToLocalStorage,
+} from "@/components/shared/utilities/LocalStorage/LocalStorage";
+import styles from "./MainLayout.module.css";
 import { Heading } from "@chakra-ui/react";
-import { getItemFromLocalStorage, removeLocalStorageItem, saveToLocalStorage } from "@/components/shared/utilities/LocalStorage/LocalStorage";
 
 const tvShow: IShow = {
   title: "Navy Cis Los Angeles",
   description:
-  "Follows undercover agents assigned to the Office of Special Projects, a special branch of the Naval Criminal Investigative Service (NCIS)",
+    "Follows undercover agents assigned to the Office of Special Projects, a special branch of the Naval Criminal Investigative Service (NCIS)",
   averageRating: 0,
   imageUrl: "/images/navy-cis.jpg",
 };
@@ -20,16 +24,15 @@ const tvShow: IShow = {
 export default function MainLayout() {
   const [reviewArr, setReviewArr] = useState<IReview[]>([]);
   const [show, setShow] = useState<IShow>(tvShow);
-  
+
   useEffect(() => {
     const arr = getItemFromLocalStorage();
     setReviewArr(arr);
-  }, [])
-  
-  useEffect(() =>{
-    calculateAverageRating(reviewArr);
-  }, [reviewArr])
+  }, []);
 
+  useEffect(() => {
+    calculateAverageRating(reviewArr);
+  }, [reviewArr]);
 
   function calculateAverageRating(reviews: IReview[]) {
     const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
@@ -49,14 +52,13 @@ export default function MainLayout() {
   function onDeleteReview(reviewId: string) {
     const filteredArray = reviewArr.filter((review) => review.id !== reviewId);
     setReviewArr(filteredArray);
-    if(!filteredArray.length){
+    if (!filteredArray.length) {
       removeLocalStorageItem();
-    }
-    else{
+    } else {
       saveToLocalStorage("reviewarray", filteredArray);
     }
   }
-  
+
   return (
     <main className={styles.main}>
       <Heading
