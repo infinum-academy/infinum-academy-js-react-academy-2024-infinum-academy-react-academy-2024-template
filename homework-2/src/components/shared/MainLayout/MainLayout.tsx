@@ -16,7 +16,8 @@ import { Heading } from "@chakra-ui/react";
 const tvShow: IShow = {
   title: "Navy Cis Los Angeles",
   description:
-    "Follows undercover agents assigned to the Office of Special Projects, a special branch of the Naval Criminal Investigative Service (NCIS)",
+    `Follows undercover agents assigned to the Office of Special Projects,
+     a special branch of the Naval Criminal Investigative Service (NCIS)`,
   averageRating: 0,
   imageUrl: "/images/navy-cis.jpg",
 };
@@ -28,11 +29,8 @@ export default function MainLayout() {
   useEffect(() => {
     const arr = getItemFromLocalStorage();
     setReviewArr(arr);
+    calculateAverageRating(arr);
   }, []);
-
-  useEffect(() => {
-    calculateAverageRating(reviewArr);
-  }, [reviewArr]);
 
   function calculateAverageRating(reviews: IReview[]) {
     const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
@@ -47,11 +45,13 @@ export default function MainLayout() {
     const newArray = [review, ...reviewArr];
     setReviewArr(newArray);
     saveToLocalStorage("reviewarray", newArray);
+    calculateAverageRating(newArray);
   }
 
   function onDeleteReview(reviewId: string) {
     const filteredArray = reviewArr.filter((review) => review.id !== reviewId);
     setReviewArr(filteredArray);
+    calculateAverageRating(filteredArray);
     if (!filteredArray.length) {
       removeLocalStorageItem();
     } else {

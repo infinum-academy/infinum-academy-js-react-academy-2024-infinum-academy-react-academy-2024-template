@@ -1,7 +1,8 @@
 interface StarIconProps {
   label: string;
   value: number;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function StarIcon(props: StarIconProps){
@@ -11,6 +12,7 @@ export default function StarIcon(props: StarIconProps){
         type="radio"
         name={props.label}
         value={props.value}
+        onBlur={props.onBlur}
         onChange={props.onChange}
         tabIndex={2}
       ></input>

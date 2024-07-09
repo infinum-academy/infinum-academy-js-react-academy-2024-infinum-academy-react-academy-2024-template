@@ -12,7 +12,7 @@ export default function RootLayout({
       <head>
         <Meta></Meta>
       </head>
-      <body>
+      <body id="body">
         <Providers>{children}</Providers>
       </body>
     </html>

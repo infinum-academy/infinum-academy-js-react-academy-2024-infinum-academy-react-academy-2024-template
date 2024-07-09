@@ -23,7 +23,7 @@
 }
 
 .reviewPostBtn{
-  width: 75px !important;
+  width: 75px;
 }
 
 .reviewRating > label:hover{
@@ -37,5 +37,5 @@
 
 .reviewRating > label:hover > i,
 .reviewRating > label:hover ~ label > i {
-  color: gold !important;
+  color: gold;
 }

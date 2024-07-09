@@ -1,33 +1,35 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./ReviewForm.module.css";
 import { IReview, IReviewFormProps } from "@/typings/review";
 import StarIcon from "../StarIcon/StarIcon";
 import { nanoid } from "nanoid";
-import {
-  Button,
-  Flex,
-  Textarea,
-} from "@chakra-ui/react";
+import { Button, Flex, Textarea } from "@chakra-ui/react";
 
 export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const commentEl = useRef<HTMLTextAreaElement>();
+  const starsParent = useRef<HTMLDivElement>();
 
-  function onRatingInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function onRatingInputSelection(event: React.ChangeEvent<HTMLInputElement>) {
     const currentRating = Number(event.target.value);
     setRating(currentRating);
+  }
+
+  function onRatingChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const currentRating = Number(event.target.value);
     styleRatingStars(currentRating);
   }
 
   function styleRatingStars(currentRating: number) {
-    const stars: NodeListOf<HTMLElement>  = document.querySelectorAll(
-      "#reviewRating i"
-    );
+    const stars = starsParent.current!.childNodes as NodeListOf<HTMLElement>;
+    
+    stars.forEach((star) => {
+      (star as HTMLElement).style.color = "#fff";
+    });
     const selectedIndex = 5 - currentRating;
-
-    stars.forEach((star) => (star.style.color = "#fff"));
     for (let i = 4; i >= selectedIndex; i--) {
       stars[i].style.color = "gold";
     }
@@ -41,7 +43,8 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
 
     const newReview: IReview = {
       id: nanoid(),
-      avatar: "https://st3.depositphotos.com/6672868/13701/v/380/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
+      avatar:
+        "https://st3.depositphotos.com/6672868/13701/v/380/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
       email: "email@example.com",
       comment: comment,
       rating: rating,
@@ -51,12 +54,9 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   }
 
   function resetFormInputs() {
-    const stars = document.querySelectorAll(
-      ".star"
-    ) as NodeListOf<HTMLElement>;
-
+    const stars = starsParent.current!.childNodes as NodeListOf<HTMLElement>;
     stars.forEach((star) => (star.style.color = "#fff"));
-
+    commentEl.current!.value = "";
     setComment("");
     setRating(0);
   }
@@ -64,24 +64,31 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   return (
     <Flex className={styles.reviewForm}>
       <Textarea
+        ref={commentEl as React.RefObject<HTMLTextAreaElement>}
         color="black"
         bg="white"
         className={styles.reviewComment}
-        name="review-comment"
         id="reviewComment"
         placeholder="Add review"
         rows={3}
         tabIndex={1}
-        value={comment}
-        onChange={(event) => setComment(event.target.value)}
+        onBlur={(event) => setComment(event.target.value)}
       ></Textarea>
 
-      <Flex className={styles.reviewRating} id="reviewRating">
-        {
-          Array.from({ length: 5 }).map((_, index) => (
-            <StarIcon key={index} label="rating" value={5 - index} onChange={onRatingInputChange}/>
-          ))
-        }
+      <Flex
+        className={styles.reviewRating}
+        id="reviewRating"
+        ref={starsParent as React.RefObject<HTMLDivElement>}
+      >
+        {Array.from({ length: 5 }).map((_, index) => (
+          <StarIcon
+            key={index}
+            label="rating"
+            value={5 - index}
+            onBlur={onRatingInputSelection}
+            onChange={onRatingChange}
+          />
+        ))}
       </Flex>
 
       <div>

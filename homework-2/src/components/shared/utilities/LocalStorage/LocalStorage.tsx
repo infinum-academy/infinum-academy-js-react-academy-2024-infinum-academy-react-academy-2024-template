@@ -11,3 +11,4 @@ export function saveToLocalStorage(key: string, value: IReview[]) {
 export function removeLocalStorageItem(){
   localStorage.removeItem("reviewarray");
 }
+

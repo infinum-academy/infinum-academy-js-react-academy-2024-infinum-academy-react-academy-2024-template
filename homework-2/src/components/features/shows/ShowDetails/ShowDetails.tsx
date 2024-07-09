@@ -8,7 +8,7 @@ import { Box, Card, Heading, Text } from "@chakra-ui/react";
 const defaultImageSrc = "https://fakeimg.pl/960x540?text=No+image+found";
 
 export default function ShowDetails({show}: {show: IShow}) {
-  const { title, description, averageRating, imageUrl } = show || {};
+  const { title, description, averageRating, imageUrl } = show;
   const [isFound, setIsFound] = useState(false);
   
   useEffect(() => {
