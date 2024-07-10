@@ -1,0 +1,12 @@
+.showSection{
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.showImg{
+  width: 100%;
+}
+
+.showInfo{
+  padding: 30px;
+}
