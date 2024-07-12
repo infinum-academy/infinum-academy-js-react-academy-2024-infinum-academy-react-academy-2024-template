@@ -1,0 +1,11 @@
+.main {
+    padding: 6rem;
+    min-height: 100vh;
+    background-color: #2e0033;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .main {
+      padding: 1rem;
+    }
+  }

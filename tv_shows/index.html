@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>TV Shows App</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/png" href="images/tv_icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="page-container">
+            <h1>TV Shows App</h1>
+            <div id="show-preview">
+                <img id="dark-image" src="images/dark_background.png" alt="Dark" width="100%" />
+                <div id="show-description">
+                    <h2>Dark</h2>
+                    <div>
+                        A family saga with a supernatural twist, set in a German town where the disappearance of two young children exposes the relationships among four families.
+                    </div>
+                    <div id="average-rating"></div>
+                </div>
+            </div>
+
+            <div id="reviews">
+                <h2>Reviews</h2>
+                <div id="add-review-area">
+                    <textarea id="review-text" class="review-field" placeholder="Add review..."></textarea>
+                    <div id="post-rating-footer">
+                        <div id="review-rating-2"></div>
+                        <button id="post-button" onclick="postReview()">Post</button>
+                    </div>
+                </div>
+                <div id="review-list"></div>
+            </div>
+        </div>
+        <script src="index.js">  </script>
+    </body>
+</html>
