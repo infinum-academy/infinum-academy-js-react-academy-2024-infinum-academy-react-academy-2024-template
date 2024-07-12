@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import styles from "./ReviewForm.module.css";
 import { IReview, IReviewFormProps } from "@/typings/review";
 import StarIcon from "../StarIcon/StarIcon";
-import { nanoid } from "nanoid";
+import { v4 as uuidv4 } from 'uuid';
 import { Button, Flex, Textarea } from "@chakra-ui/react";
 
 export default function ReviewForm({ onAddReview }: IReviewFormProps) {
@@ -42,7 +42,7 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
     }
 
     const newReview: IReview = {
-      id: nanoid(),
+      id: uuidv4(),
       avatar:
         "https://st3.depositphotos.com/6672868/13701/v/380/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
       email: "email@example.com",
