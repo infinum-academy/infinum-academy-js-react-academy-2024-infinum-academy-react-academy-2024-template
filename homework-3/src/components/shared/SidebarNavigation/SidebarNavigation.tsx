@@ -38,7 +38,7 @@ export default function SidebarNavigation() {
             <NextLink
               href={`/shows/all-shows`}
               onClick={(e) => changeActiveLink(e)}
-              className={styles.navLink}
+              className={`${styles.navLink} ${styles.active}`}
             >
               All shows
             </NextLink>
