@@ -1,25 +1,23 @@
 import React, {useState} from "react";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 
-interface FallbackImageProps {
+interface ImageWithFallbackProps {
   src: string | undefined;
   alt: string;
   width: number;
-  height: number;
   defaultHeight: string;
   defaultWidth: string;
   className?: string;
 }
 
-export default function FallbackImage({
+export default function ImageWithFallback({
   src,
   alt,
   width,
-  height,
   className,
   defaultHeight,
   defaultWidth
-}: FallbackImageProps) {
+}: ImageWithFallbackProps) {
   const defaultImageSrc = `https://fakeimg.pl/${defaultHeight}x${defaultWidth}?text=No+image+found`;
   const [imgSrc, setImgSrc] = useState(src || defaultImageSrc);
 
@@ -33,8 +31,6 @@ export default function FallbackImage({
       src={imgSrc}
       alt={alt}
       width={width}
-      height={height}
-      priority={true}
       onError={handleImageError}
     />
   );

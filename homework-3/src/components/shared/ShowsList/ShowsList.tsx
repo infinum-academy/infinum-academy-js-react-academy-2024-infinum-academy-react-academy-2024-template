@@ -11,7 +11,7 @@ export default function ShowsList({shows}: {shows: Array<IShow>}) {
   ));
   return (
     <SimpleGrid
-      minChildWidth="175px"
+      minChildWidth="185px"
       spacing="20px"
     >
       {showsList}

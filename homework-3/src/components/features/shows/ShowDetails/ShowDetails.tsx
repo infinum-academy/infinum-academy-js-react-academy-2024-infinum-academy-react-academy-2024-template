@@ -19,7 +19,6 @@ export default function ShowDetails({ show }: { show: IShow }) {
           src={image_url}
           alt={title}
           width={200}
-          height={200}
           defaultHeight="960"
           defaultWidth="540"
         />

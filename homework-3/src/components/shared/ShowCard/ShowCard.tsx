@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, Heading, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IShow } from "@/typings/show";
-import FallbackImage from "../utilities/ImageWithFallback/ImageWithFallback";
+import ImageWithFallback from "../utilities/ImageWithFallback/ImageWithFallback";
 
 export default function ShowCard({ show }: { show: IShow }) {
   return (
@@ -11,11 +11,10 @@ export default function ShowCard({ show }: { show: IShow }) {
           href={`/shows/${show.id}`}
           passHref
         >
-          <FallbackImage
+          <ImageWithFallback
             src={show.image_url || ""}
             alt="show image"
-            width={960}
-            height={540}
+            width={1200}
             defaultWidth="1200"
             defaultHeight="800"
           />
