@@ -13,17 +13,7 @@ import {
 import styles from "./MainLayout.module.css";
 import { Heading } from "@chakra-ui/react";
 
-const tvShow: IShow = {
-  id: "1",
-  title: "Navy Cis Los Angeles",
-  description:
-    `Follows undercover agents assigned to the Office of Special Projects,
-     a special branch of the Naval Criminal Investigative Service (NCIS)`,
-  averageRating: 0,
-  imageUrl: "/images/navy-cis.jpg",
-};
-
-export default function MainLayout() {
+export default function MainLayout({tvShow}: {tvShow: IShow}) {
   const [reviewArr, setReviewArr] = useState<IReview[]>([]);
   const [show, setShow] = useState<IShow>(tvShow);
 

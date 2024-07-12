@@ -1,48 +1,42 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React from "react";
 import styles from "./ShowDetails.module.css";
 import { IShow } from "@/typings/show";
-import { Box, Card, Heading, Text } from "@chakra-ui/react";
+import { Box, Card, Heading, Text, Flex } from "@chakra-ui/react";
+import ImageWithFallback from "@/components/shared/utilities/ImageWithFallback/ImageWithFallback";
 
-const defaultImageSrc = "https://fakeimg.pl/960x540?text=No+image+found";
-
-export default function ShowDetails({show}: {show: IShow}) {
-  const { title, description, averageRating, imageUrl } = show;
-  const [isFound, setIsFound] = useState(false);
-  
-  useEffect(() => {
-    const isImageFound = async (imageSrc: string) => {
-      const response = await fetch("http://localhost:3000" + imageSrc, {
-        method: "HEAD",
-      });
-      const result = response?.status === 200;
-      setIsFound(result);
-    };
-    isImageFound(String(imageUrl));
-  }, [imageUrl]);
+export default function ShowDetails({ show }: { show: IShow }) {
+  const { title, description, average_rating, image_url } = show;
 
   return (
-    <Card bg="white" color="navy" className={styles.showSection}>
-      <Image
-        className={styles.showImage}
-        src={isFound ? String(imageUrl) : defaultImageSrc}
-        alt="navy-cis-team-photo"
-        priority={true}
-        width={960}
-        height={540}
-      />
-      <Box className={styles.showInfo}>
-        <Heading size="lg">{title}</Heading>
-        <i
-          className="fa-regular fa-star fa-lg"
-          style={{ color: "#FFD43B" }}
-        ></i>
-        {averageRating ? <span className="averageRating"> {averageRating}</span> : <span> No ratings</span>}
-        <Text>
-          {description}
-        </Text>
-      </Box>
+    <Card
+      bg="white"
+      color="navy"
+      className={styles.showSection}
+    >
+      <Flex className={styles.showFlex}>
+        <ImageWithFallback
+          className={styles.showImage}
+          src={image_url}
+          alt={title}
+          width={200}
+          height={200}
+          defaultHeight="960"
+          defaultWidth="540"
+        />
+        <Box
+          className={styles.showInfo}
+          paddingLeft="4"
+        >
+          <Heading size="lg">{title}</Heading>
+          <i
+            className="fa-regular fa-star fa-lg"
+            style={{ color: "#FFD43B" }}
+          ></i>
+          {average_rating && <span className="averageRating"> {average_rating}/5</span>}
+          {!average_rating && <span> No ratings</span>}
+          <Text>{description}</Text>
+        </Box>
+      </Flex>
     </Card>
   );
 }

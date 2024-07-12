@@ -4,9 +4,15 @@
 }
 
 .showImg{
-  width: 100%;
+  width: auto;
 }
 
 .showInfo{
   padding: 30px;
+}
+
+@media(max-width: 750px){
+  .showFlex{
+    flex-direction: column;
+  }
 }

@@ -8,8 +8,7 @@ export default function SidebarNavigation() {
   const navListEl = useRef<HTMLDivElement>(null);
 
   function changeActiveLink(e: any) {
-    const links = navListEl.current
-      ?.childNodes as NodeListOf<HTMLAnchorElement>;
+    const links = navListEl.current?.childNodes as NodeListOf<HTMLAnchorElement>;
     links.forEach((link: HTMLAnchorElement) =>
       link.classList.remove(styles.active)
     );

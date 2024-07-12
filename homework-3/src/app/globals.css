@@ -17,3 +17,13 @@ button{
   border: none;
   cursor: pointer;
 }
+
+#contentWrapper{
+  max-width: 70%;
+}
+
+@media (max-width: 530px) {
+  #contentWrapper{
+    max-width: 100%;
+  }
+}

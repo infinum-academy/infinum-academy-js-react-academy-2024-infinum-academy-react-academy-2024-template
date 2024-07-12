@@ -1,9 +1,0 @@
-.showListSection{
-  max-width: 70%;
-}
-
-@media (max-width: 530px) {
-  .showListSection{
-    max-width: 100%;
-  }
-}

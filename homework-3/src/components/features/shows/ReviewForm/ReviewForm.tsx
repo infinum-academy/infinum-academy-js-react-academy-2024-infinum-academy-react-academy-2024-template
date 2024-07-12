@@ -46,8 +46,8 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
       avatar:
         "https://st3.depositphotos.com/6672868/13701/v/380/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
       email: "email@example.com",
-      comment: comment,
-      rating: rating,
+      comment,
+      rating,
     };
     onAddReview(newReview);
     resetFormInputs();

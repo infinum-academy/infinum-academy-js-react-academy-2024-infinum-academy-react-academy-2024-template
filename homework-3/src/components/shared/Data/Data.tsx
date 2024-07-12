@@ -1,7 +1,7 @@
 import { IShow } from "../../../typings/show";
 import { nanoid } from "nanoid";
 
-export const shows: IShow[] = [
+export const shows: Array<IShow> = [
   {
     id: nanoid(),
     title: "The Witcher",
@@ -48,3 +48,5 @@ export const shows: IShow[] = [
       "https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_.jpg",
   },
 ];
+
+export const topRatedShows: Array<IShow> = shows.filter((show) => show.averageRating >= 4);
