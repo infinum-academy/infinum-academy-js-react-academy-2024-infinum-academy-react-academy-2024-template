@@ -1,0 +1,172 @@
+{
+	"shows": [
+		{
+			"id": "106",
+			"average_rating": 2,
+			"description": "When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces in order to get him back.",
+			"image_url": "https://picsum.photos/400/600?random=1",
+			"no_of_reviews": 4,
+			"title": "Stranger Things"
+		},
+		{
+			"id": "107",
+			"average_rating": null,
+			"description": "Sheriff Deputy Rick Grimes wakes up from a coma to learn the world is in ruins and must lead a group of survivors to stay alive.",
+			"image_url": "https://picsum.photos/400/600?random=2",
+			"no_of_reviews": 0,
+			"title": "The Walking Dead"
+		},
+		{
+			"id": "108",
+			"average_rating": 4,
+			"description": "Follows teenager Clay Jensen, in his quest to uncover the story behind his classmate and crush, Hannah, and her decision to end her life.",
+			"image_url": "https://picsum.photos/400/600?random=3",
+			"no_of_reviews": 6,
+			"title": "13 Reasons Why"
+		},
+		{
+			"id": "109",
+			"average_rating": 4,
+			"description": "Set ninety-seven years after a nuclear war has destroyed civilization, when a spaceship housing humanity's lone survivors sends one hundred juvenile delinquents back to Earth, in hopes of possibly re-populating the planet.",
+			"image_url": "https://picsum.photos/400/600?random=4",
+			"no_of_reviews": 1,
+			"title": "The 100"
+		},
+		{
+			"id": "111",
+			"average_rating": 4,
+			"description": "While navigating the troubled waters of romance, school and family, Archie and his gang become entangled in dark Riverdale mysteries.",
+			"image_url": "https://picsum.photos/400/600?random=5",
+			"no_of_reviews": 9,
+			"title": "Riverdale"
+		},
+		{
+			"id": "112",
+			"average_rating": 2,
+			"description": "A drama centered on the personal and professional lives of five surgical interns and their supervisors.",
+			"image_url": "https://picsum.photos/400/600?random=6",
+			"no_of_reviews": 2,
+			"title": "Grey's Anatomy"
+		},
+		{
+			"id": "113",
+			"average_rating": 5,
+			"description": "After being struck by lightning, Barry Allen wakes up from his coma to discover he's been given the power of super speed, becoming the next Flash, fighting crime in Central City.",
+			"image_url": "https://picsum.photos/400/600?random=8",
+			"no_of_reviews": 1,
+			"title": "The Flash"
+		},
+		{
+			"id": "114",
+			"average_rating": 4,
+			"description": "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+			"image_url": "https://picsum.photos/400/600?random=8",
+			"no_of_reviews": 12,
+			"title": "Arrow"
+		},
+		{
+			"id": "115",
+			"average_rating": 3,
+			"description": "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
+			"image_url": "https://picsum.photos/400/600?random=9",
+			"no_of_reviews": 7,
+			"title": "Money Heist"
+		},
+		{
+			"id": "116",
+			"average_rating": 2,
+			"description": "A woman who moves into an apartment across the hall from two brilliant but socially awkward physicists shows them how little they know about life outside of the laboratory.",
+			"image_url": "https://picsum.photos/400/600?random=10",
+			"no_of_reviews": 10,
+			"title": "The Big Bang Theory"
+		},
+		{
+			"id": "117",
+			"average_rating": 4,
+			"description": "An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.",
+			"image_url": "https://picsum.photos/400/600?random=11",
+			"no_of_reviews": 17,
+			"title": "Black Mirror"
+		},
+		{
+			"id": "118",
+			"average_rating": 2,
+			"description": "A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.",
+			"image_url": "https://picsum.photos/400/600?random=12",
+			"no_of_reviews": 20,
+			"title": "Sherlock"
+		},
+		{
+			"id": "119",
+			"average_rating": 2,
+			"description": "Vikings transports us to the brutal and mysterious world of Ragnar Lothbrok, a Viking warrior and farmer who yearns to explore - and raid - the distant shores across the ocean.",
+			"image_url": "https://picsum.photos/400/600?random=13",
+			"no_of_reviews": 17,
+			"title": "Vikings"
+		},
+		{
+			"id": "120",
+			"average_rating": 4,
+			"description": "Four friends band together against an anonymous foe who threatens to reveal their darkest secrets, while also investigating the disappearance of their best friend.",
+			"image_url": "https://picsum.photos/400/600?random=14",
+			"no_of_reviews": 1,
+			"title": "Pretty Little Liars"
+		},
+		{
+			"id": "121",
+			"average_rating": 2,
+			"description": "The lives, loves, dangers and disasters in the town, Mystic Falls, Virginia. Creatures of unspeakable horror lurk beneath this town as a teenage girl is suddenly torn between two vampire brothers.",
+			"image_url": "https://picsum.photos/400/600?random=15",
+			"no_of_reviews": 13,
+			"title": "The Vampire Diaries"
+		},
+		{
+			"id": "122",
+			"average_rating": 3,
+			"description": "An anthology series centering on different characters and locations, including a house with a murderous past, an insane asylum, a witch coven, a freak show circus, a haunted hotel, a possessed farmhouse, a cult, the apocalypse, and a slasher summer camp.",
+			"image_url": "https://picsum.photos/400/600?random=16",
+			"no_of_reviews": 2,
+			"title": "American Horror Story"
+		},
+		{
+			"id": "123",
+			"average_rating": 4,
+			"description": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+			"image_url": "https://picsum.photos/400/600?random=17",
+			"no_of_reviews": 13,
+			"title": "Breaking Bad"
+		},
+		{
+			"id": "125",
+			"average_rating": 3,
+			"description": "Two brothers follow their father's footsteps as hunters, fighting evil supernatural beings of many kinds, including monsters, demons and gods that roam the earth.",
+			"image_url": "https://picsum.photos/400/600?random=18",
+			"no_of_reviews": 16,
+			"title": "Supernatural"
+		},
+		{
+			"id": "127",
+			"average_rating": 3,
+			"description": "A group of ambitious law students and their brilliant criminal defense professor become involved in a twisted murder plot that promises to change the course of their lives.",
+			"image_url": "https://picsum.photos/400/600?random=19",
+			"no_of_reviews": 5,
+			"title": "How to Get Away with Murder"
+		},
+		{
+			"id": "128",
+			"average_rating": 2,
+			"description": "An average high school student and his best friend get caught up in some trouble causing him to receive a werewolf bite. As a result they find themselves in the middle of all sorts of dramas in Beacon Hills.",
+			"image_url": "https://picsum.photos/400/600?random=20",
+			"no_of_reviews": 16,
+			"title": "Teen Wolf"
+		}
+	],
+	"meta": {
+		"pagination": {
+			"count": 100,
+			"page": 1,
+			"items": 100,
+			"pages": 1
+		}
+	}
+}

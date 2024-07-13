@@ -1,0 +1,42 @@
+.navbar {
+  height: calc(100vh - 60px);
+  position: fixed;
+  flex-direction: column;
+  top: 30px;
+}
+
+.navItems {
+  top: 60px;
+}
+
+.navWrapper {
+  margin-right: 120px;
+  margin-bottom: calc(100vh - 60px);
+}
+
+.navLink{
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 12px;
+}
+
+.active{
+  background-color: rgb(55, 22, 135);
+}
+
+@media (max-width: 530px) {
+  .navbar {
+    position: static;
+    top: 0;
+    flex-direction: row;
+    align-items: center;
+  }
+  .navbar {
+    height: auto;
+  }
+  .navWrapper {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}

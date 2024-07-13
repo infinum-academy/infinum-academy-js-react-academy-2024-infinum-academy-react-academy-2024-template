@@ -1,0 +1,18 @@
+.showSection{
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.showImg{
+  width: auto;
+}
+
+.showInfo{
+  padding: 30px;
+}
+
+@media(max-width: 750px){
+  .showFlex{
+    flex-direction: column;
+  }
+}
