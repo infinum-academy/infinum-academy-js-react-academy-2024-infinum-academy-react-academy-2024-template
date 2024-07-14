@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Heading, Image } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import NextLink from "next/link";
 import styles from "./SidebarNavigation.module.css";
 import { useRef } from "react";
@@ -56,7 +56,9 @@ export default function SidebarNavigation() {
 
         <NextLink 
           href={`#`}
-        >Logout</NextLink>
+        >
+          Logout
+        </NextLink>
       </Flex>
     </div>
   );
