@@ -10,6 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useSWRMutation from "swr/mutation";
 import { mutator } from "@/fetchers/mutators";
+import AuthRedirect from "../AuthRedirect/AuthRedirect";
+import { useUser } from "@/hooks/useUser";
 
 interface IAuthFormProps {
   schema: yup.ObjectSchema<{
@@ -32,17 +34,18 @@ export default function AuthForm({schema, isLogin, swrKey}: IAuthFormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState(false);
 
+  const { mutate } = useUser();
   const { trigger } = useSWRMutation(swrKey, mutator, {
     onSuccess: (resData) => {
-      console.log(resData)
       setIsSuccess(true);
+      mutate(resData, {'revalidate': false});
       if(error) setError(false);
     },
     onError: () => {
       setError(true);
       reset();
     }
-  })
+  });
 
   const onSubmit = async (data: IFormData) => {
     await trigger(data);
@@ -50,6 +53,7 @@ export default function AuthForm({schema, isLogin, swrKey}: IAuthFormProps) {
 
   return (
     <>
+    <AuthRedirect to="/shows/all-shows" isLoggedIn={true}/>
     {
       error && 
         <Alert status="error" color="darkred">
@@ -106,7 +110,7 @@ export default function AuthForm({schema, isLogin, swrKey}: IAuthFormProps) {
             <Text>
               {isLogin && 
                 <>
-                  Don&apos;t have an account? 
+                  {`Don't have an account?`}
                   <Link href="/register"> Register</Link>
                 </>
               }

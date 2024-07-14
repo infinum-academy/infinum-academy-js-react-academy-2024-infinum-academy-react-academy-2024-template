@@ -1,12 +1,19 @@
 export async function fetcher<T>(input: string | URL | globalThis.Request, init?: RequestInit): Promise<T> {
-	try {
-		const response = await fetch(input, init);
-		if (!response.ok) {
-			throw new Error(`Response status: ${response.status}`);
-		}
+  try {
+    const headers = {
+      ...init?.headers,
+      uid: localStorage.getItem('uid') || '',
+      client: localStorage.getItem('client') || '',
+      'access-token': localStorage.getItem('access-token') || '',
+    };
+    const response = await fetch(input, { ...init, headers });
 
-		return await response.json();
-	} catch (error) {
-		throw new Error(`Response status: ${error}`);
-	}
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw new Error(`Response status: ${error}`);
+  }
 }
