@@ -55,9 +55,9 @@ export default function SidebarNavigation() {
         </nav>
 
         <NextLink 
-          href={`#`}
-        >
-          Logout
+          href={`/shows/logout`}
+          className={styles.logoutBtn}
+        >Logout
         </NextLink>
       </Flex>
     </div>

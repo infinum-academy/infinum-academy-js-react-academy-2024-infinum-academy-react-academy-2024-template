@@ -9,7 +9,7 @@ interface IAuthDirectProps {
 }
 
 export default function AuthRedirect({to, isLoggedIn} : IAuthDirectProps){
-  const router = useRouter()
+  const router = useRouter();
   const { data, isLoading } = useUser();
 
   useEffect(() => {
