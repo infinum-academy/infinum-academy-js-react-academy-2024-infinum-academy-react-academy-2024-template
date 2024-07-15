@@ -2,19 +2,12 @@
 import { Flex } from "@chakra-ui/react";
 import NextLink from "next/link";
 import styles from "./SidebarNavigation.module.css";
-import { useRef } from "react";
 import LogoImage from "@/components/core/LogoImage/LogoImage";
+import { navItems } from "../Data/NavigationItems";
+import { usePathname } from "next/navigation";
 
 export default function SidebarNavigation() {
-  const navListEl = useRef<HTMLDivElement>(null);
-
-  function changeActiveLink(e: any) {
-    const links = navListEl.current?.childNodes as NodeListOf<HTMLAnchorElement>;
-    links.forEach((link: HTMLAnchorElement) =>
-      link.classList.remove(styles.active)
-    );
-    e.currentTarget.classList.add(styles.active);
-  }
+  const path = usePathname();
 
   return (
     <div className={styles.navWrapper}>
@@ -28,29 +21,18 @@ export default function SidebarNavigation() {
             flexWrap="wrap"
             flexDirection="column"
             gap={3}
-            ref={navListEl}
           >
-            <NextLink
-              href={`/shows/all-shows`}
-              onClick={(e) => changeActiveLink(e)}
-              className={`${styles.navLink} ${styles.active}`}
-            >
-              All shows
-            </NextLink>
-            <NextLink
-              href={`/shows/top-rated`}
-              onClick={(e) => changeActiveLink(e)}
-              className={styles.navLink}
-            >
-              Top rated
-            </NextLink>
-            <NextLink
-              href={`/shows/my-profile`}
-              onClick={(e) => changeActiveLink(e)}
-              className={styles.navLink}
-            >
-              My profile
-            </NextLink>
+            {
+              navItems.map((item, index) => (
+                <NextLink
+                  href={item.path}
+                  key={index}
+                  className={`${styles.navLink} ${path === item.path && styles.active}`}
+                >
+                  {item.name}
+                </NextLink>
+              ))
+            }
           </Flex>
         </nav>
 

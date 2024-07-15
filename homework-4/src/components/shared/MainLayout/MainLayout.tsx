@@ -15,7 +15,11 @@ import { Heading } from "@chakra-ui/react";
 
 export default function MainLayout({tvShow}: {tvShow: IShow}) {
   const [reviewArr, setReviewArr] = useState<IReview[]>([]);
-  const [show, setShow] = useState<IShow>(tvShow);
+  const [tempShow, setTempShow] = useState({
+    sumOfRatings:  Math.round(tvShow.no_of_reviews * tvShow.average_rating),
+    noOfReviews: tvShow.no_of_reviews
+  });
+  const apiRatingSum = Math.round(tvShow.average_rating * tvShow.no_of_reviews);
 
   useEffect(() => {
     const arr = getItemFromLocalStorage();
@@ -24,12 +28,24 @@ export default function MainLayout({tvShow}: {tvShow: IShow}) {
   }, []);
 
   function calculateAverageRating(reviews: IReview[]) {
-    const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
-    const average = Number((sum / reviews.length).toFixed(2));
-    setShow((prevShow) => ({
-      ...prevShow,
-      averageRating: average,
-    }));
+    let sum = 0;
+    let average = 0;
+
+    if (reviews.length && apiRatingSum) {
+      sum = reviews.reduce((acc, review) => acc + review.rating, apiRatingSum);
+      average = sum / (apiRatingSum + reviews.length);
+    } else if (!reviews.length && apiRatingSum) {
+      sum = apiRatingSum;
+      average = sum / apiRatingSum;
+    } else if (reviews.length && !apiRatingSum) {
+      sum = reviews.reduce((acc, review) => acc + review.rating, 0);
+      average = reviews.length ? sum / reviews.length : 0;
+    }
+
+    setTempShow({
+      sumOfRatings: sum,
+      noOfReviews: reviews.length + tvShow.no_of_reviews
+    });
   }
 
   function onAddReview(review: IReview) {
@@ -52,7 +68,7 @@ export default function MainLayout({tvShow}: {tvShow: IShow}) {
 
   return (
     <main className={styles.main}>
-      <ShowDetails show={show} />
+      <ShowDetails show={tvShow} tempShow={tempShow} />
       <Heading
         as="h2"
         size="lg"

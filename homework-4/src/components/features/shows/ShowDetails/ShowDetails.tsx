@@ -4,8 +4,14 @@ import { IShow } from "@/typings/show";
 import { Box, Card, Heading, Text, Flex } from "@chakra-ui/react";
 import ImageWithFallback from "@/components/shared/utilities/ImageWithFallback/ImageWithFallback";
 
-export default function ShowDetails({ show }: { show: IShow }) {
-  const { title, description, average_rating, image_url } = show;
+interface IShowDetailsProps {
+  show: IShow;
+  tempShow: { sumOfRatings: number; noOfReviews: number };
+}
+
+export default function ShowDetails({ show, tempShow }: IShowDetailsProps) {
+  const { title, description, image_url } = show;
+  const { sumOfRatings, noOfReviews } = tempShow;
 
   return (
     <Card
@@ -31,8 +37,13 @@ export default function ShowDetails({ show }: { show: IShow }) {
             className="fa-regular fa-star fa-lg"
             style={{ color: "#FFD43B" }}
           ></i>
-          {average_rating && <span className="averageRating"> {average_rating}/5</span>}
-          {!average_rating && <span> No ratings</span>}
+          {!!noOfReviews && (
+            <span className="averageRating">
+              {" "}
+              {(sumOfRatings / noOfReviews).toFixed(1)}/5 {`(${noOfReviews})`}{" "}
+            </span>
+          )}
+          {!noOfReviews && <span> No ratings</span>}
           <Text>{description}</Text>
         </Box>
       </Flex>

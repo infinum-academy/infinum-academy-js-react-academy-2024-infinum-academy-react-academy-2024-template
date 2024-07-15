@@ -22,6 +22,7 @@ import useSWRMutation from "swr/mutation";
 import { mutator } from "@/fetchers/mutators";
 import AuthRedirect from "../AuthRedirect/AuthRedirect";
 import { useUser } from "@/hooks/useUser";
+import PasswordInput from "@/components/core/PasswordInput/PasswordInput";
 
 interface IAuthFormProps {
   schema: yup.ObjectSchema<
@@ -125,9 +126,8 @@ export default function AuthForm({ schema, isLogin, swrKey }: IAuthFormProps) {
               isInvalid={!!errors.password}
               isDisabled={isSubmitting}
             >
-              <Input
-                {...register("password", { required: "true" })}
-                type="password"
+              <PasswordInput
+                register={register("password", { required: "true" })}
                 placeholder="Password"
               />
               {errors.password && (
@@ -140,9 +140,8 @@ export default function AuthForm({ schema, isLogin, swrKey }: IAuthFormProps) {
                 isInvalid={!!errors.password_confirmation}
                 isDisabled={isSubmitting}
               >
-                <Input
-                  {...register("password_confirmation", { required: "true" })}
-                  type="password"
+                <PasswordInput
+                  register={register("password_confirmation", {required: "true"})}
                   placeholder="Confirm password"
                 />
                 {errors.password_confirmation && (

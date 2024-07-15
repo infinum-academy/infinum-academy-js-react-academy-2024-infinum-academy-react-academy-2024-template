@@ -4,6 +4,7 @@ export interface IShow {
   average_rating: number;
   description?: string;
   image_url?: string;
+  no_of_reviews: number;
 }
 
 export interface IShowList{
