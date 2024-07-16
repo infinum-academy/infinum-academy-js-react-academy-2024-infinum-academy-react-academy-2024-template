@@ -75,7 +75,7 @@ export default function AuthForm({ schema, isLogin, swrKey }: IAuthFormProps) {
   return (
     <>
       <AuthRedirect
-        to="/shows/all-shows"
+        to="/all-shows"
         isLoggedIn={true}
       />
       {error && (

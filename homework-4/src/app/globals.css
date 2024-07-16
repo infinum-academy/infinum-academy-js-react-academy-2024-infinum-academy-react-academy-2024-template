@@ -1,29 +1,11 @@
 #body{
   margin: 0;
-  padding: 0 20px 20px 20px;
+  padding: 0;
   background-color: rgb(27, 0, 76);
   color: #fff;
-}
-
-#root{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 30px;
-  position: relative;
 }
 
 button{
   border: none;
   cursor: pointer;
-}
-
-#contentWrapper{
-  max-width: 70%;
-}
-
-@media (max-width: 530px) {
-  #contentWrapper{
-    max-width: 100%;
-  }
 }

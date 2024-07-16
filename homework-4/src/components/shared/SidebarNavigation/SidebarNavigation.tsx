@@ -20,6 +20,7 @@ export default function SidebarNavigation() {
           <Flex
             flexWrap="wrap"
             flexDirection="column"
+            alignItems="center"
             gap={3}
           >
             {
@@ -37,7 +38,7 @@ export default function SidebarNavigation() {
         </nav>
 
         <NextLink 
-          href={`/shows/logout`}
+          href={`/logout`}
           className={styles.logoutBtn}
         >Logout
         </NextLink>

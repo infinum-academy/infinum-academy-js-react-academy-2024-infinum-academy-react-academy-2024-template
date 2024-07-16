@@ -1,14 +1,14 @@
 export const navItems = [
   {
     name: "All shows",
-    path: "/shows/all-shows"
+    path: "/all-shows"
   },
   {
     name: "Top rated",
-    path: "/shows/top-rated"
+    path: "/top-rated"
   },
   {
     name: "My profile",
-    path: "/shows/my-profile"
+    path: "/my-profile"
   }
 ]

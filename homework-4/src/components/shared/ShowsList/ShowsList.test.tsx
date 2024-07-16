@@ -8,6 +8,7 @@ const shows = [
     description: 'Test Description 1',
     average_rating: 4,
     image_url: 'https://fakeimg.pl/300/',
+    no_of_reviews: 10
   },
   {
     id: '2',
@@ -15,6 +16,7 @@ const shows = [
     description: 'Test Description 2',
     average_rating: 3,
     image_url: 'https://fakeimg.pl/300/',
+    no_of_reviews: 20
   },
   {
     id: '3',
@@ -22,6 +24,7 @@ const shows = [
     description: 'Test Description 3',
     average_rating: 5,
     image_url: 'https://fakeimg.pl/300/',
+    no_of_reviews: 30
   }
 ]
 

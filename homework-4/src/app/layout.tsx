@@ -1,8 +1,6 @@
 import "./globals.css";
 import { Meta } from "../components/shared/utilities/Meta/Meta";
 import { Providers } from "./providers";
-import SidebarNavigation from "@/components/shared/SidebarNavigation/SidebarNavigation";
-import { Container } from "@chakra-ui/react";
 
 export default function RootLayout({
   children
@@ -15,14 +13,7 @@ export default function RootLayout({
         <Meta></Meta>
       </head>
       <body id="body">
-        <div id="root">
-          <SidebarNavigation />
-          <div id="contentWrapper">
-            <Container maxW="5xl">
-              <Providers>{children}</Providers>
-            </Container>
-          </div>
-        </div>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

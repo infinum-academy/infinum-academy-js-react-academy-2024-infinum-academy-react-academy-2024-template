@@ -1,8 +1,8 @@
 .navbar {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 20px);
   position: fixed;
   flex-direction: column;
-  top: 30px;
+  top: 0px;
 }
 
 .navItems {
@@ -16,7 +16,7 @@
 
 .navLink, .logoutBtn{
   text-align: center;
-  padding: 5px 0;
+  padding: 5px 15px;
   border-radius: 12px;
 }
 

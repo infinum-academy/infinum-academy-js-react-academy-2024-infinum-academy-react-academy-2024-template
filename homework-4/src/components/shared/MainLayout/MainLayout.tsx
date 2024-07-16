@@ -28,8 +28,7 @@ export default function MainLayout({tvShow}: {tvShow: IShow}) {
   }, []);
 
   function calculateAverageRating(reviews: IReview[]) {
-    let sum = 0;
-    let average = 0;
+    let sum = 0, average = 0;
 
     if (reviews.length && apiRatingSum) {
       sum = reviews.reduce((acc, review) => acc + review.rating, apiRatingSum);

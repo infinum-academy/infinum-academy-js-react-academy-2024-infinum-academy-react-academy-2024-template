@@ -8,6 +8,7 @@ describe('ShowCard', () => {
     description: 'Test Description',
     average_rating: 4,
     image_url: 'https://fakeimg.pl/300/',
+    no_of_reviews: 10
   };
 
   it('should contain image with provided src', () => {
