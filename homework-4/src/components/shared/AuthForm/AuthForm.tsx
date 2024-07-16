@@ -9,6 +9,8 @@ import {
   FormErrorMessage,
   Button,
   Text,
+  InputLeftElement,
+  InputGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -112,11 +114,16 @@ export default function AuthForm({ schema, isLogin, swrKey }: IAuthFormProps) {
               isInvalid={!!errors.email}
               isDisabled={isSubmitting}
             >
-              <Input
-                {...register("email", { required: "true" })}
-                type="email"
-                placeholder="Email"
-              />
+              <InputGroup>
+                <Input
+                  {...register("email", { required: "true" })}
+                  type="email"
+                  placeholder="Email"
+                />
+                <InputLeftElement>
+                  <i className="fa-solid fa-user"></i>
+                </InputLeftElement>
+              </InputGroup>
               {errors.email && (
                 <FormErrorMessage>{errors.email.message}</FormErrorMessage>
               )}
@@ -158,6 +165,9 @@ export default function AuthForm({ schema, isLogin, swrKey }: IAuthFormProps) {
               px={7}
               py={2}
               color="rgb(55,22,135)"
+              textTransform="uppercase"
+              fontSize="0.8rem"
+              isLoading={isSubmitting}
             >
               {!isLogin ? "Sign up" : "Login"}
             </Button>
@@ -165,13 +175,17 @@ export default function AuthForm({ schema, isLogin, swrKey }: IAuthFormProps) {
               {isLogin && (
                 <>
                   {`Don't have an account?`}
-                  <Link href="/register"> Register</Link>
+                  <Link href="/register"> 
+                    <b> Register</b>
+                  </Link>
                 </>
               )}
               {!isLogin && (
                 <>
                   Already have an account?
-                  <Link href="/login"> Login</Link>
+                  <Link href="/login"> 
+                    <b> Login</b>
+                  </Link>
                 </>
               )}
             </Text>

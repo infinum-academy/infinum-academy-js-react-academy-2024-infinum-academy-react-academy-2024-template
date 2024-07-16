@@ -5,12 +5,12 @@ import ImageWithFallback from "../utilities/ImageWithFallback/ImageWithFallback"
 
 export default function ShowCard({ show }: { show: IShow }) {
   return (
-    <Card overflow={"hidden"}>
-      <CardHeader p={0}>
-        <NextLink
-          href={`/shows/${show.id}`}
-          passHref
-        >
+    <NextLink
+      href={`/shows/${show.id}`}
+      passHref
+    >
+      <Card overflow={"hidden"}>
+        <CardHeader p={0}>
           <ImageWithFallback
             src={show.image_url || ""}
             alt="show image"
@@ -18,19 +18,19 @@ export default function ShowCard({ show }: { show: IShow }) {
             defaultWidth="1200"
             defaultHeight="800"
           />
-        </NextLink>
-      </CardHeader>
-      <CardBody>
-        <Heading size="s">{show.title}</Heading>
-        <Text>
-          <i
-            className="fa-regular fa-star fa-md"
-            style={{ color: "#FFD43B" }}
-          ></i>
-          {show.average_rating && show.average_rating + "/5"}
-          {!show.average_rating && " Not rated yet"}
-        </Text>
-      </CardBody>
-    </Card>
+        </CardHeader>
+        <CardBody>
+          <Heading size="s">{show.title}</Heading>
+          <Text>
+            <i
+              className="fa-regular fa-star fa-md"
+              style={{ color: "#FFD43B" }}
+            ></i>
+            {show.average_rating && show.average_rating + "/5"}
+            {!show.average_rating && " Not rated yet"}
+          </Text>
+        </CardBody>
+      </Card>
+    </NextLink>
   );
 }
