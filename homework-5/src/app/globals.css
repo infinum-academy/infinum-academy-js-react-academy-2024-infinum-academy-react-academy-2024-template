@@ -1,0 +1,11 @@
+#body{
+  margin: 0;
+  padding: 0;
+  background-color: rgb(27, 0, 76);
+  color: #fff;
+}
+
+button{
+  border: none;
+  cursor: pointer;
+}
