@@ -6,10 +6,9 @@ import StarIcon from "../StarIcon/StarIcon";
 import { v4 as uuidv4 } from "uuid";
 import { Button, chakra, Flex, FormControl, FormErrorMessage, Textarea, Input, useToast } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useUser } from "@/hooks/useUser";
 import { IUser } from "@/fetchers/user";
+import { resetingRatingStars, styleRatingStars } from "@/components/shared/utilities/RatingStarsStyle/RatingStarsStyle";
 
 interface IFormData {
   comment: string;
@@ -19,22 +18,15 @@ interface IApiResponse{
   user: IUser;
 }
 
-const schema = yup
-  .object({
-    comment: yup.string().required("Comment is required"),
-    rating: yup
-      .number()
-      .required("Rating is required")
-      .min(1, "Rating must be at least 1 star")
-      .max(5, "Rating must be at most 5 stars"),
-  })
-  .required();
-
 export default function ReviewForm({ handleReview, show_id, review, mode }: IReviewFormProps) {
   useEffect(() => {
-    styleRatingStars(review?.rating || 0);
+    styleRatingStars(starsParent, review?.rating || 0);
   }, []);
-
+  
+  const [rating, setRating] = useState(review?.rating);
+  const { data } = useUser() as { data: IApiResponse };
+  const starsParent = useRef<HTMLDivElement>(null);
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -43,12 +35,10 @@ export default function ReviewForm({ handleReview, show_id, review, mode }: IRev
     reset,
     trigger,
   } = useForm<IFormData>({
-    resolver: yupResolver(schema),
+    defaultValues: {
+      rating: review?.rating || 0,
+    }
   });
-  const [rating, setRating] = useState(review?.rating || 0);
-  const starsParent = useRef<HTMLDivElement>(null);
-  const { data } = useUser() as { data: IApiResponse };
-  const toast = useToast();
 
   function onRatingInputSelection(event: React.ChangeEvent<HTMLInputElement>) {
     const currentRating = Number(event.target.value);
@@ -57,36 +47,14 @@ export default function ReviewForm({ handleReview, show_id, review, mode }: IRev
 
   function onRatingChange(event: React.ChangeEvent<HTMLInputElement>) {
     const currentRating = Number(event.target.value);
-    styleRatingStars(currentRating);
+    styleRatingStars(starsParent, currentRating);
     setValue("rating", currentRating);
     trigger("rating");
   }
 
-  function styleRatingStars(currentRating: number) {
-    if (starsParent.current) {
-      const stars = starsParent.current?.childNodes as NodeListOf<HTMLElement>;
-      resetingRatingStars();
-
-      const selectedIndex = 5 - currentRating;
-      for (let i = 4; i >= selectedIndex; i--) {
-        stars[i].style.color = "gold";
-      }
-    }
-  }
-
-  function resetingRatingStars() {
-    const stars = starsParent.current?.childNodes as NodeListOf<HTMLLabelElement>;
-
-    stars.forEach((star) => {
-      star.style.color = "#fff";
-      const inputElement = star.childNodes[0] as HTMLInputElement;
-      inputElement.checked = false;
-    });
-  }
-
   const onSubmit = ({ comment, rating }: IFormData) => {
     const newReview: IReview = {
-      id: review ? review.id : uuidv4(),
+      id: review?.id || uuidv4(),
       comment,
       rating,
       show_id,
@@ -98,7 +66,7 @@ export default function ReviewForm({ handleReview, show_id, review, mode }: IRev
     };
     handleReview(newReview);
     setRating(0);
-    resetingRatingStars();
+    resetingRatingStars(starsParent);
     reset();
   };
 
@@ -128,7 +96,7 @@ export default function ReviewForm({ handleReview, show_id, review, mode }: IRev
           className={styles.reviewComment}
           id="reviewComment"
           placeholder={mode == 'create' ? 'Add review' : 'Edit review'}
-          defaultValue={review?.comment || ''}
+          defaultValue={review?.comment}
           rows={3}
           tabIndex={1}
         ></Textarea>
@@ -143,8 +111,12 @@ export default function ReviewForm({ handleReview, show_id, review, mode }: IRev
       >
         <Input
           type="hidden"
-          {...register("rating")}
-          value={rating || String(review?.rating)}
+          {...register("rating", {
+            required: "Rating is required",
+            min: { value: 1, message: "Rating must be between 1 and 5" },
+            max: { value: 5, message: "Rating must be between 1 and 5" }
+          })}
+          value={rating || 0}
         />
         <Flex
           className={styles.reviewRating}

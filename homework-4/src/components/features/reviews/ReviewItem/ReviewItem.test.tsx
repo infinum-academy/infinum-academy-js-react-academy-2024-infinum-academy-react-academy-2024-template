@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import React, { act } from "react";
 import { mutate } from 'swr';
 import { deleteReview, updateReview } from '@/fetchers/mutators';
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import ReviewItem from "./ReviewItem";
 import { swrKeys } from '@/fetchers/swrKeys';
 
@@ -80,14 +80,10 @@ describe("ReviewItem", () => {
     render(<ReviewItem review={review} onDeleteReview={mockDelete} />);
     
     const dropdownBtn = screen.getByLabelText('Options');
-    act(() => {
-      dropdownBtn.click();
-    })
+    fireEvent.click(dropdownBtn);
 
     const deleteBtn = await screen.findByText("Delete");
-    act(() => {
-      deleteBtn.click();
-    });
+    fireEvent.click(deleteBtn);
     
     await waitFor(() => {
       expect(deleteReview).toHaveBeenCalled();
@@ -98,14 +94,10 @@ describe("ReviewItem", () => {
     render(<ReviewItem review={review} onDeleteReview={() => {}} />);
   
     const dropdownBtn = screen.getByLabelText('Options');
-    act(() => {
-      dropdownBtn.click();
-    });
+    fireEvent.click(dropdownBtn)
   
     const editBtn = await screen.findByText('Edit');
-    act(() => {
-      editBtn.click();
-    });
+    fireEvent.click(editBtn)
   
     const modalHeader = await screen.findByText('Update review');
     await waitFor(() => {
@@ -117,17 +109,16 @@ describe("ReviewItem", () => {
     await userEvent.type(commentInput, 'new comment'); 
   
     const submitBtn = screen.getByText('Save');
-    act(() => {
-      submitBtn.click();
-    });
+    fireEvent.click(submitBtn);
+
+    const arg = {
+      ...review,
+      comment: 'new comment'
+    };
   
     await waitFor(() => {
-      expect(updateReview).toHaveBeenCalledWith(swrKeys.updateReview(review.id), 
-      {
-        arg: {
-          ...review,
-          comment: 'new comment'
-        }
+      expect(updateReview).toHaveBeenCalledWith(swrKeys.updateReview(review.id),{
+        arg
       });
       expect(mutate).toHaveBeenCalled();
       expect(modalHeader).not.toBeInTheDocument();

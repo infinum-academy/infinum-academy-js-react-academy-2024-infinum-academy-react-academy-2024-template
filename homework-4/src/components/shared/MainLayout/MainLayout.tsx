@@ -22,7 +22,6 @@ export default function MainLayout({ tvShow }: { tvShow: IShow }) {
     noOfReviews: tvShow.no_of_reviews
   });
   const toast = useToast();
-
   const { data, error, isLoading } = useSWR<IReviewList>(swrKeys.getReviews(tvShow.id), fetcher);
   
   const { trigger: addTrigger } = useSWRMutation(swrKeys.createReview, createReview, {
@@ -40,7 +39,7 @@ export default function MainLayout({ tvShow }: { tvShow: IShow }) {
   });
 
   useEffect(() => {
-    if(isLoading && !data) return;
+    if(isLoading) return;
 
     if (data && data.reviews) {
       setReviewArr(data.reviews);
@@ -51,7 +50,6 @@ export default function MainLayout({ tvShow }: { tvShow: IShow }) {
   if (error) return <div>No reviews available</div>;
   if (isLoading) return <LoadingSpinner />;
 
-  
   function calculateAverageRating(reviews: IReview[]) {
     let sum = 0;
 

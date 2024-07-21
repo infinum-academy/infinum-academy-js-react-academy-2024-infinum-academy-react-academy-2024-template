@@ -30,8 +30,9 @@ export default function ReviewOptionDropdown({
       }
     }
   );
-
-  const { trigger: updateTrigger } = useSWRMutation(swrKeys.updateReview(review.id), updateReview, 
+  const { trigger: updateTrigger } = useSWRMutation(
+    swrKeys.updateReview(review.id), 
+    updateReview, 
     {
       onSuccess: () => {
         mutate(swrKeys.getReviews(review.show_id));

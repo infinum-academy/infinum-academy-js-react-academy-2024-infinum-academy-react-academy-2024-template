@@ -1,13 +1,21 @@
 "use client";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 import LogoImage from "@/components/core/LogoImage/LogoImage";
 import { navItems } from "../Data/NavigationItems";
 import styles from "./SidebarNavigation.module.css";
+import { useUser } from "@/hooks/useUser";
+import { clearLocalStorage } from "../utilities/LocalStorage/LocalStorage";
 
 export default function SidebarNavigation() {
   const path = usePathname();
+  const { mutate } = useUser();
+
+  function onLogout(){
+    clearLocalStorage();
+    mutate(null, {"revalidate": false});
+  }
 
   return (
     <div className={styles.navWrapper}>
@@ -37,11 +45,11 @@ export default function SidebarNavigation() {
           </Flex>
         </nav>
 
-        <NextLink 
-          href={`/logout`}
+        <Text as="button"
+          onClick={onLogout}
           className={styles.logoutBtn}
         >Logout
-        </NextLink>
+        </Text>
       </Flex>
     </div>
   );

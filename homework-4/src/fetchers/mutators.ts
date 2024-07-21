@@ -23,7 +23,6 @@ export async function mutator(url: string, { arg }: { arg: IFormData }) {
   return response.json();
 }
 
-
 export function createReview(url: string, { arg }: { arg: IReview }): Promise<IApiResponseReview> {
   const bodyData = {
     comment: arg.comment,

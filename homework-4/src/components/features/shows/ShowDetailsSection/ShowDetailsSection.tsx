@@ -20,7 +20,7 @@ export default function ShowDetailsPage() {
     return <div>No show available</div>;
   }
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
