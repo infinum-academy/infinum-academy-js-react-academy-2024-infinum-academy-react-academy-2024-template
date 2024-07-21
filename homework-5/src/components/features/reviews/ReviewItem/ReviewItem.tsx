@@ -1,20 +1,12 @@
-import { IReviewItemProps } from "@/typings/review";
+import { Flex, Avatar, Text } from "@chakra-ui/react";
+import { useUser } from "@/hooks/useUser";
+import ReviewOptionDropdown from "../ReviewOptionDropdown/ReviewOptionDropdown";
 import styles from "./ReviewItem.module.css";
-import { Button, Flex, Avatar, Text } from "@chakra-ui/react";
-import { deleteReview } from "@/fetchers/mutators";
-import { swrKeys } from "@/fetchers/swrKeys";
-import useSWRMutation from "swr/mutation";
+import { IApiResponseUser } from "@/typings/apiResponse";
+import { IReviewItemProps } from "@/typings/review";
 
 export default function ReviewItem({review, onDeleteReview}: IReviewItemProps) {
-  const { trigger: deleteTrigger, isMutating } = useSWRMutation(swrKeys.deleteReview(review.id), deleteReview, {
-    onSuccess: () => {
-      onDeleteReview(review.id);
-    }
-  });
-
-  async function handleDeleting(){
-    await deleteTrigger();
-  }
+  const { data } = useUser() as { data: IApiResponseUser};
 
   return (
     <Flex
@@ -64,17 +56,10 @@ export default function ReviewItem({review, onDeleteReview}: IReviewItemProps) {
             })}
           </p>
         </div>
-        <div>
-          <Button
-            display="inline-block"
-            colorScheme="red"
-            onClick={handleDeleting}
-            disabled={isMutating}
-          >
-            Delete
-          </Button>
-        </div>
       </Flex>
+      {data?.user.id === review.user?.id && 
+        <ReviewOptionDropdown onDeleteReview={onDeleteReview} review={review}/>
+      }
     </Flex>
   );
 }

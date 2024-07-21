@@ -37,7 +37,7 @@ export function createReview(url: string, { arg }: { arg: IReview }): Promise<IA
       "access-token": localStorage.getItem("access-token") || "",
       client: localStorage.getItem("client") || "",
       "token-type": "Bearer",
-      expiry: localStorage.getItem("expiry") || "1719238397",
+      expiry: "1719238397",
       uid: localStorage.getItem("uid") || "",
       "Content-Type": "application/json"
     },
@@ -57,5 +57,26 @@ export function deleteReview(url: string): Promise<IApiResponseReview> {
       uid: localStorage.getItem("uid") || "",
       "Content-Type": "application/json"
     }
+  });
+}
+
+export function updateReview(url: string, { arg }: { arg: IReview }): Promise<IApiResponseReview> {
+  const bodyData = {
+    comment: arg.comment,
+    rating: arg.rating,
+    show_id: arg.show_id
+  }
+  return fetcher(url, {
+    method: 'PUT',
+    headers: {
+      Accept: "application/json",
+      "access-token": localStorage.getItem("access-token") || "",
+      client: localStorage.getItem("client") || "",
+      "token-type": "Bearer",
+      expiry: localStorage.getItem("expiry") || "17192383970",
+      uid: localStorage.getItem("uid") || "",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(bodyData)
   });
 }

@@ -1,68 +1,77 @@
 "use client";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { Heading, useToast } from "@chakra-ui/react";
+import React from "react";
+import { useState, useEffect } from "react";
+import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
+import { swrKeys } from "@/fetchers/swrKeys";
+import { fetcher } from "@/fetchers/fetcher";
+import { createReview } from "@/fetchers/mutators";
 import ShowReviewSection from "@/components/features/shows/ShowReviewSection/ShowReviewSection";
 import ShowDetails from "@/components/features/shows/ShowDetails/ShowDetails";
-import { IReview } from "@/typings/review";
-import { IShow } from "@/typings/show";
-import {
-  getItemFromLocalStorage,
-  removeLocalStorageItem,
-  saveToLocalStorage,
-} from "@/components/shared/utilities/LocalStorage/LocalStorage";
+import LoadingSpinner from "@/components/core/LoadingSpinner/LoadingSpinner";
 import styles from "./MainLayout.module.css";
-import { Heading } from "@chakra-ui/react";
+import { IApiResponseReview } from "@/typings/apiResponse";
+import { IReview, IReviewList } from "@/typings/review";
+import { IShow } from "@/typings/show";
 
-export default function MainLayout({tvShow}: {tvShow: IShow}) {
+export default function MainLayout({ tvShow }: { tvShow: IShow }) {
   const [reviewArr, setReviewArr] = useState<IReview[]>([]);
   const [tempShow, setTempShow] = useState({
-    sumOfRatings:  Math.round(tvShow.no_of_reviews * tvShow.average_rating),
+    sumOfRatings: Math.round(tvShow.no_of_reviews * tvShow.average_rating),
     noOfReviews: tvShow.no_of_reviews
   });
-  const apiRatingSum = Math.round(tvShow.average_rating * tvShow.no_of_reviews);
+  const toast = useToast();
+
+  const { data, error, isLoading } = useSWR<IReviewList>(swrKeys.getReviews(tvShow.id), fetcher);
+  
+  const { trigger: addTrigger } = useSWRMutation(swrKeys.createReview, createReview, {
+    onSuccess: (resData: IApiResponseReview) => {
+      const newArray = [resData.review, ...reviewArr];
+      setReviewArr(newArray);
+      calculateAverageRating(newArray);
+      toast({
+        title: "Review added",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  });
 
   useEffect(() => {
-    const arr = getItemFromLocalStorage();
-    setReviewArr(arr);
-    calculateAverageRating(arr);
-  }, []);
+    if(isLoading && !data) return;
 
-  function calculateAverageRating(reviews: IReview[]) {
-    let sum = 0, average = 0;
-
-    if (reviews.length && apiRatingSum) {
-      sum = reviews.reduce((acc, review) => acc + review.rating, apiRatingSum);
-      average = sum / (apiRatingSum + reviews.length);
-    } else if (!reviews.length && apiRatingSum) {
-      sum = apiRatingSum;
-      average = sum / apiRatingSum;
-    } else if (reviews.length && !apiRatingSum) {
-      sum = reviews.reduce((acc, review) => acc + review.rating, 0);
-      average = reviews.length ? sum / reviews.length : 0;
+    if (data && data.reviews) {
+      setReviewArr(data.reviews);
+      calculateAverageRating(data.reviews);
     }
+  }, [data, isLoading]);
+
+  if (error) return <div>No reviews available</div>;
+  if (isLoading) return <LoadingSpinner />;
+
+  
+  function calculateAverageRating(reviews: IReview[]) {
+    let sum = 0;
+
+    if (reviews.length)
+      sum = reviews.reduce((acc, review) => acc + review.rating, 0);
 
     setTempShow({
       sumOfRatings: sum,
-      noOfReviews: reviews.length + tvShow.no_of_reviews
+      noOfReviews: reviews.length
     });
   }
 
-  function onAddReview(review: IReview) {
-    const newArray = [review, ...reviewArr];
-    setReviewArr(newArray);
-    saveToLocalStorage("reviewarray", newArray);
-    calculateAverageRating(newArray);
+  async function onAddReview(review: IReview) {
+    await addTrigger(review);
   }
 
-  function onDeleteReview(reviewId: string) {
+  async function onDeleteReview(reviewId: string) {
     const filteredArray = reviewArr.filter((review) => review.id !== reviewId);
     setReviewArr(filteredArray);
     calculateAverageRating(filteredArray);
-    if (!filteredArray.length) {
-      removeLocalStorageItem();
-    } else {
-      saveToLocalStorage("reviewarray", filteredArray);
-    }
   }
 
   return (
@@ -77,6 +86,7 @@ export default function MainLayout({tvShow}: {tvShow: IShow}) {
       </Heading>
       <ShowReviewSection
         reviews={reviewArr}
+        show={tvShow}
         onAddReview={onAddReview}
         onDeleteReview={onDeleteReview}
       />

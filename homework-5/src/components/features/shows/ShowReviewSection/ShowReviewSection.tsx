@@ -6,7 +6,7 @@ import { IReviewProps } from "@/typings/review";
 export default function ReviewContainer({reviews, show, onAddReview, onDeleteReview} : IReviewProps){
   return (
     <div className="review-section">
-      <ReviewForm onAddReview={onAddReview} show={show}/>
+      <ReviewForm handleReview={onAddReview} show_id={show.id} mode="create"/>
       <ReviewList reviews={reviews} onDeleteReview={onDeleteReview}/>
     </div>
   )

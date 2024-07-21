@@ -2,15 +2,12 @@
 import AuthRedirect from "@/components/shared/AuthRedirect/AuthRedirect";
 import { useUser } from "@/hooks/useUser";
 import ImageWithFallback from "@/components/shared/utilities/ImageWithFallback/ImageWithFallback";
-import { IUser } from "@/fetchers/user";
-import { Box, Card, CardBody, CardHeader, chakra, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
-
-interface IApiResponse{
-  user: IUser;
-}
+import { Card, CardBody, CardHeader, chakra, Heading, Text } from "@chakra-ui/react";
+import { IApiResponseUser} from "@/typings/apiResponse";
 
 export default function MyProfile() {
-  const { data } = useUser() as { data: IApiResponse };
+  const { data } = useUser() as { data: IApiResponseUser };
+  
   return (
     <chakra.div>
       <AuthRedirect to="/login" isLoggedIn={false}/>

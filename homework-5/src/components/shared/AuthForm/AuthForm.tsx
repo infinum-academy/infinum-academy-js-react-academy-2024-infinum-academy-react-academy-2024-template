@@ -1,30 +1,19 @@
 "use client";
-import {
-  Alert,
-  AlertIcon,
-  chakra,
-  Flex,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  Button,
-  Text,
-  InputLeftElement,
-  InputGroup,
+import { Alert, AlertIcon, chakra, Flex, FormControl, Input, FormErrorMessage, Button, Text, InputLeftElement, InputGroup,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useUser } from "@/hooks/useUser";
 import LogoImage from "@/components/core/LogoImage/LogoImage";
+import PasswordInput from "@/components/core/PasswordInput/PasswordInput";
+import AuthRedirect from "../AuthRedirect/AuthRedirect";
+import { mutator } from "@/fetchers/mutators";
 import styles from "./AuthForm.module.css";
-import Link from "next/link";
-import IFormData from "@/typings/form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import useSWRMutation from "swr/mutation";
-import { mutator } from "@/fetchers/mutators";
-import AuthRedirect from "../AuthRedirect/AuthRedirect";
-import { useUser } from "@/hooks/useUser";
-import PasswordInput from "@/components/core/PasswordInput/PasswordInput";
+import IFormData from "@/typings/form";
 
 interface IAuthFormProps {
   schema: yup.ObjectSchema<

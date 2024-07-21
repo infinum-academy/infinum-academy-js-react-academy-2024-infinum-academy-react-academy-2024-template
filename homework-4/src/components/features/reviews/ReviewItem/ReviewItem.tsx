@@ -1,8 +1,13 @@
-import { IReviewItemProps } from "@/typings/review";
+import { Flex, Avatar, Text } from "@chakra-ui/react";
+import { useUser } from "@/hooks/useUser";
+import ReviewOptionDropdown from "../ReviewOptionDropdown/ReviewOptionDropdown";
 import styles from "./ReviewItem.module.css";
-import { Button, Flex, Avatar, Text } from "@chakra-ui/react";
+import { IApiResponseUser } from "@/typings/apiResponse";
+import { IReviewItemProps } from "@/typings/review";
 
 export default function ReviewItem({review, onDeleteReview}: IReviewItemProps) {
+  const { data } = useUser() as { data: IApiResponseUser};
+
   return (
     <Flex
       className={styles.reviewElement}
@@ -21,9 +26,9 @@ export default function ReviewItem({review, onDeleteReview}: IReviewItemProps) {
         >
           <Avatar
             mr={2}
-            src={review.avatar}
+            src={(review.user?.image_url !== null) ? review.user?.image_url : ""}
           />
-          <Text>{review.email}</Text>
+          <Text>{review.user?.email}</Text>
         </Flex>
         <Text>{review.comment}</Text>
         <div>
@@ -51,16 +56,10 @@ export default function ReviewItem({review, onDeleteReview}: IReviewItemProps) {
             })}
           </p>
         </div>
-        <div>
-          <Button
-            display="inline-block"
-            colorScheme="red"
-            onClick={() => onDeleteReview(review.id)}
-          >
-            Delete
-          </Button>
-        </div>
       </Flex>
+      {data?.user.id === review.user?.id && 
+        <ReviewOptionDropdown onDeleteReview={onDeleteReview} review={review}/>
+      }
     </Flex>
   );
 }

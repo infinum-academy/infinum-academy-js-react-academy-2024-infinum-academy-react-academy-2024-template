@@ -24,8 +24,10 @@ export interface IReviewProps{
 }
 
 export interface IReviewFormProps{
-  show: IShow;
-  onAddReview: (review: IReview) => void;
+  handleReview: (review: IReview) => void;
+  mode: "create" | "update";
+  show_id: string;
+  review?: IReview;
 }
 
 export interface IReviewListProps{

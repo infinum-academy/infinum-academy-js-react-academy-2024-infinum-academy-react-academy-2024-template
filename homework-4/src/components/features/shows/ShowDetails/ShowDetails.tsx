@@ -1,8 +1,8 @@
+import { Box, Card, Heading, Text, Flex } from "@chakra-ui/react";
 import React from "react";
+import ImageWithFallback from "@/components/shared/utilities/ImageWithFallback/ImageWithFallback";
 import styles from "./ShowDetails.module.css";
 import { IShow } from "@/typings/show";
-import { Box, Card, Heading, Text, Flex } from "@chakra-ui/react";
-import ImageWithFallback from "@/components/shared/utilities/ImageWithFallback/ImageWithFallback";
 
 interface IShowDetailsProps {
   show: IShow;

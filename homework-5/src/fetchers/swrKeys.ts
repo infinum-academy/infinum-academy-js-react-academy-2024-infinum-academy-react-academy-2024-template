@@ -10,5 +10,5 @@ export const swrKeys = {
   getReviews: (id: string) => `${apiUrl}/shows/${id}/reviews`,
   createReview: `${apiUrl}/reviews`,
   deleteReview: (reviewId: string) => `${apiUrl}/reviews/${reviewId}`,
-  updateReview: (id: string, reviewId: string) => `${apiUrl}/shows/${id}/reviews/${reviewId}`
+  updateReview: (reviewId: string) => `${apiUrl}/reviews/${reviewId}`
 };

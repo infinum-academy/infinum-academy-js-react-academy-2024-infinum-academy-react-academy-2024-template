@@ -1,26 +1,22 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./ReviewForm.module.css";
 import { IReview, IReviewFormProps } from "@/typings/review";
 import StarIcon from "../StarIcon/StarIcon";
 import { v4 as uuidv4 } from "uuid";
-import {
-  Button,
-  chakra,
-  Flex,
-  FormControl,
-  FormErrorMessage,
-  Textarea,
-  Input,
-  useToast,
-} from "@chakra-ui/react";
+import { Button, chakra, Flex, FormControl, FormErrorMessage, Textarea, Input, useToast } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useUser } from "@/hooks/useUser";
+import { IUser } from "@/fetchers/user";
 
 interface IFormData {
   comment: string;
   rating: number;
+}
+interface IApiResponse{
+  user: IUser;
 }
 
 const schema = yup
@@ -34,7 +30,11 @@ const schema = yup
   })
   .required();
 
-export default function ReviewForm({ onAddReview }: IReviewFormProps) {
+export default function ReviewForm({ handleReview, show_id, review, mode }: IReviewFormProps) {
+  useEffect(() => {
+    styleRatingStars(review?.rating || 0);
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -45,8 +45,9 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   } = useForm<IFormData>({
     resolver: yupResolver(schema),
   });
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(review?.rating || 0);
   const starsParent = useRef<HTMLDivElement>(null);
+  const { data } = useUser() as { data: IApiResponse };
   const toast = useToast();
 
   function onRatingInputSelection(event: React.ChangeEvent<HTMLInputElement>) {
@@ -74,8 +75,7 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
   }
 
   function resetingRatingStars() {
-    const stars = starsParent.current
-      ?.childNodes as NodeListOf<HTMLLabelElement>;
+    const stars = starsParent.current?.childNodes as NodeListOf<HTMLLabelElement>;
 
     stars.forEach((star) => {
       star.style.color = "#fff";
@@ -86,20 +86,17 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
 
   const onSubmit = ({ comment, rating }: IFormData) => {
     const newReview: IReview = {
-      id: uuidv4(),
-      avatar:
-        "https://st3.depositphotos.com/6672868/13701/v/380/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
-      email: "email@example.com",
+      id: review ? review.id : uuidv4(),
       comment,
       rating,
+      show_id,
+      user: {
+        id: data.user.id,
+        email: data.user.email,
+        image_url: data.user.image_url
+      }
     };
-    onAddReview(newReview);
-    toast({
-      title: "Review posted",
-      status: "success",
-      duration: 3500,
-      isClosable: true,
-    });
+    handleReview(newReview);
     setRating(0);
     resetingRatingStars();
     reset();
@@ -109,13 +106,14 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
     toast({
       title: "Review not posted",
       status: "error",
-      duration: 3500,
+      duration: 3000,
       isClosable: true,
     });
   }
 
   return (
     <chakra.form
+      id={mode}
       className={styles.reviewForm}
       onSubmit={handleSubmit(onSubmit, onError)}
     >
@@ -129,7 +127,8 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
           bg="white"
           className={styles.reviewComment}
           id="reviewComment"
-          placeholder="Add review"
+          placeholder={mode == 'create' ? 'Add review' : 'Edit review'}
+          defaultValue={review?.comment || ''}
           rows={3}
           tabIndex={1}
         ></Textarea>
@@ -145,7 +144,7 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
         <Input
           type="hidden"
           {...register("rating")}
-          value={rating}
+          value={rating || String(review?.rating)}
         />
         <Flex
           className={styles.reviewRating}
@@ -167,16 +166,21 @@ export default function ReviewForm({ onAddReview }: IReviewFormProps) {
         </FormErrorMessage>
       </FormControl>
 
-      <div>
-        <Button
-          className="reviewPostBtn"
-          type="submit"
-          tabIndex={3}
-          isDisabled={isSubmitting}
-        >
-          Post
-        </Button>
-      </div>
+      {
+        mode == 'create' && (
+          <div>
+            <Button
+              form="create"
+              className="reviewPostBtn"
+              type="submit"
+              tabIndex={3}
+              isDisabled={isSubmitting}
+            >
+              Post
+            </Button>
+          </div>
+        )
+      }
     </chakra.form>
   );
 }

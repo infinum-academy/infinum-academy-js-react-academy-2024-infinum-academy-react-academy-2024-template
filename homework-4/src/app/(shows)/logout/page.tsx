@@ -2,12 +2,8 @@
 import AuthRedirect from "@/components/shared/AuthRedirect/AuthRedirect";
 import { useUser } from "@/hooks/useUser";
 import { useEffect } from "react";
+import { clearLocalStorage } from "@/components/shared/utilities/LocalStorage/LocalStorage";
 
-function clearLocalStorage() {
-  localStorage.removeItem("uid");
-  localStorage.removeItem("access-token");
-  localStorage.removeItem("client");
-}
 export default function Logout(){
   const { data, isLoading, mutate } = useUser();
   useEffect(() => {
