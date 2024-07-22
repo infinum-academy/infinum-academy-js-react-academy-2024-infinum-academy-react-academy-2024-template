@@ -1,17 +1,12 @@
 .navbar {
-  height: calc(100vh - 20px);
-  position: fixed;
+  height: calc(100vh - 60px);
+  position: sticky;
   flex-direction: column;
-  top: 0px;
+  top: 25px;
 }
 
 .navItems {
   top: 60px;
-}
-
-.navWrapper {
-  margin-right: 120px;
-  margin-bottom: calc(100vh - 60px);
 }
 
 .navLink, .logoutBtn{
@@ -37,10 +32,5 @@
   }
   .navbar {
     height: auto;
-  }
-  .navWrapper {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
   }
 }

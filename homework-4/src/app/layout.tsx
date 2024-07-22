@@ -1,4 +1,3 @@
-import "./globals.css";
 import { Meta } from "../components/shared/utilities/Meta/Meta";
 import { Providers } from "./providers";
 

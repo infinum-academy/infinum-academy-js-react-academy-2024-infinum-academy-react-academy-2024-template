@@ -6,5 +6,5 @@ interface LogoImageProps {
 }
 
 export default function LogoImage({ width, className }: LogoImageProps) {
-  return <Image src="/images/logo.png" alt="logo" width={width} className={className} m={5}/>
+  return <Image src="/images/logo.svg" alt="logo" width={width} className={className}/>
 }

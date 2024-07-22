@@ -1,5 +1,5 @@
 import SidebarNavigation from "@/components/shared/SidebarNavigation/SidebarNavigation";
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 export default function RootLayout({
   children
@@ -7,11 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Flex position="relative" justifyContent="center" gap={2} flexWrap="wrap" p={5}>
-      <SidebarNavigation/>
-      <Container display="flex" justifyContent="center"  flexWrap="wrap" maxWidth="70%" mx="auto" borderRadius={8}>
+    <Flex flexWrap="wrap" p={8}>
+      <SidebarNavigation />
+      <div style={{flex: 1}}>
         {children}
-      </Container>
+      </div>
     </Flex>
   );
 }

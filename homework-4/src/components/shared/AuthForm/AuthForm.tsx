@@ -9,7 +9,6 @@ import LogoImage from "@/components/core/LogoImage/LogoImage";
 import PasswordInput from "@/components/core/PasswordInput/PasswordInput";
 import AuthRedirect from "../AuthRedirect/AuthRedirect";
 import { mutator } from "@/fetchers/mutators";
-import styles from "./AuthForm.module.css";
 import useSWRMutation from "swr/mutation";
 import IFormData from "@/typings/form";
 
@@ -74,15 +73,14 @@ export default function AuthForm({ isLogin, swrKey }: IAuthFormProps) {
       )}
       {!isSuccess && (
         <chakra.form
-          className={styles.form}
           onSubmit={handleSubmit(onSubmit)}
         >
           <Flex
             direction="column"
             alignItems="center"
-            gap={8}
+            gap="31px"
           >
-            <LogoImage width={200} />
+            <LogoImage width={199} />
             <FormControl
               isInvalid={!!errors.email}
               isDisabled={isSubmitting}
@@ -147,18 +145,11 @@ export default function AuthForm({ isLogin, swrKey }: IAuthFormProps) {
                 )}
               </FormControl>
             )}
-
             <Button
               type="submit"
-              borderRadius={20}
-              px={7}
-              py={2}
-              color="rgb(55,22,135)"
-              textTransform="uppercase"
-              fontSize="0.8rem"
               isLoading={isSubmitting}
             >
-              {!isLogin ? "Sign up" : "Login"}
+              {!isLogin ? "Sign up" : "Log in"}
             </Button>
             <Text>
               {isLogin && (
@@ -178,6 +169,7 @@ export default function AuthForm({ isLogin, swrKey }: IAuthFormProps) {
                 </>
               )}
             </Text>
+
           </Flex>
         </chakra.form>
       )}

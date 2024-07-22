@@ -10,6 +10,7 @@ export default function ShowCard({ show }: { show: IShow }) {
       href={`/shows/${show.id}`}
       passHref
       overflow="hidden"
+      variant="secondary"
     >
       <CardHeader p={0}>
         <ImageWithFallback
@@ -27,7 +28,7 @@ export default function ShowCard({ show }: { show: IShow }) {
             className="fa-regular fa-star fa-md"
             style={{ color: "#FFD43B" }}
           ></i>
-          {show.average_rating && show.average_rating + "/5"}
+          {show.average_rating && show.average_rating.toFixed(1) + "/5"}
           {!show.average_rating && " Not rated yet"}
         </Text>
       </CardBody>

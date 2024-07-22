@@ -18,13 +18,12 @@ export default function SidebarNavigation() {
   }
 
   return (
-    <div className={styles.navWrapper}>
       <Flex
         className={styles.navbar}
         justifyContent="space-between"
       >
         <nav className={styles.navItems}>
-          <LogoImage width={100} />
+          <LogoImage width={199} />
           <Flex
             flexWrap="wrap"
             flexDirection="column"
@@ -51,6 +50,5 @@ export default function SidebarNavigation() {
         >Logout
         </Text>
       </Flex>
-    </div>
   );
 }
